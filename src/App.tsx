@@ -5,7 +5,7 @@ import Main from "./components/Main";
 
 export default function App() {
   return (
-    <div className="h-screen bg-purple-300">
+    <div className="bg-purple-300">
       <Header />
       <Main />
       <Footer />

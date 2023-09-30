@@ -1,0 +1,3 @@
+{
+    "inputs": ["Name", "Description", "Personality", "Scenario", "Example Messages", "Greeting"]
+}
