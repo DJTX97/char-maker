@@ -33,6 +33,7 @@ export default function Input({ id }: InputProps) {
         value={textareaValue}
         onChange={handleValueChange}
         className="p-2 rounded-lg resize-none overflow-hidden"
+        required={id==="Name" || id==="Description" ? true : false}
       />
     </div>
   );
