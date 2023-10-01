@@ -22,18 +22,15 @@ export default function Input({ id }: InputProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <label htmlFor={id} className="text-2xl font-semibold">
-        {id}
-      </label>
+      <div className="text-2xl font-semibold">{id}</div>
       <textarea
-        name={id}
         id={id}
         ref={textareaRef}
         rows={1}
         value={textareaValue}
         onChange={handleValueChange}
         className="p-2 rounded-lg resize-none overflow-hidden"
-        required={id==="Name" || id==="Description" ? true : false}
+        required={id === "Name" || id === "Description" ? true : false}
       />
     </div>
   );
