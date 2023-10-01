@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from "react";
+import { useAtom } from "jotai";
+import { mainInputStore } from "../data/MainStore";
 
 interface InputProps {
   id: string;
+  val?: string;
 }
 
-export default function Input({ id }: InputProps) {
+export default function Input({ id, val }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaValue, setTextareaValue] = useState("");
+  const [mainInputs, setMainInputs] = useAtom(mainInputStore);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(event.target.value);
+    setMainInputs((prev: any) => ({
+      ...prev,
+      [id]: event.target.value,
+    }))
   };
 
   // Autosize textarea to fit content

@@ -1,25 +1,29 @@
-import { useState } from "react";
 import Input from "./Input";
+import { useAtom } from "jotai/react";
+import { altGreetStore } from "../data/MainStore";
 
 export default function AltGreetings() {
-  const [altGreetCounter, setAltGreetCounter] = useState(0);
+  const [altGreets, setAltGreets] = useAtom(altGreetStore);
 
   const addAltGreet = () => {
-    setAltGreetCounter((prev) => prev + 1);
+    setAltGreets((prev: string[]) => [...prev, ""]);
   };
 
-  const removeAltGreet = () => {
-    setAltGreetCounter((prev) => prev - 1);
-  };
+  const removeAltGreet = () => {};
 
   return (
     <div className="pt-12">
       <div className="flex flex-col gap-10">
-        {Array.from({ length: altGreetCounter }).map((_, index) => (
+        {altGreets.map((item, index) => (
           <div key={index} className="flex gap-5">
-            <Input id={`Alternative Greeting ${index + 1}`} />
+            <Input id={`Alternative Greeting ${index + 1}`} val={item} />
             <div className="flex items-center">
-              <button className="h-14 bg-gray-800 text-white" onClick={removeAltGreet}>Remove</button>
+              <button
+                className="h-14 bg-gray-800 text-white"
+                onClick={removeAltGreet}
+              >
+                Remove
+              </button>
             </div>
           </div>
         ))}
