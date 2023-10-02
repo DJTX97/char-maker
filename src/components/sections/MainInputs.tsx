@@ -1,6 +1,6 @@
-import Input from "./Input";
+import Input from "../microComps/Input";
 import { useAtom } from "jotai";
-import { mainInputStore } from "../data/MainStore";
+import { mainInputStore } from "../../data/MainStore";
 import { useEffect } from "react";
 
 export default function MainInputs() {
@@ -12,10 +12,10 @@ export default function MainInputs() {
 
 
   return (
-    <div className="flex flex-col gap-5">
+    <section className="flex flex-col gap-5">
       {mainInputs.map((input, index) => (
         <Input key={index} id={input.id} name={input.name} />
       ))}
-    </div>
+    </section>
   );
 }

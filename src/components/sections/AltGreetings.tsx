@@ -1,6 +1,6 @@
-import Input from "./Input";
+import Input from "../microComps/Input";
 import { useAtom } from "jotai/react";
-import { altGreetStore, altGreetType } from "../data/MainStore";
+import { altGreetStore, altGreetType } from "../../data/MainStore";
 import { useEffect } from "react";
 
 export default function AltGreetings() {
@@ -37,7 +37,7 @@ export default function AltGreetings() {
 
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
-    <div className="pt-12">
+    <section className="pt-12">
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet) => (
           <div className="flex gap-5" key={altGreet.id}>
@@ -61,6 +61,6 @@ export default function AltGreetings() {
           Add Alternate Greetings
         </button>
       </div>
-    </div>
+    </section>
   );
 }

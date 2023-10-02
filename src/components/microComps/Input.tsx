@@ -4,7 +4,7 @@ import {
   mainInputStore,
   altGreetStore,
   altGreetType
-} from "../data/MainStore";
+} from "../../data/MainStore";
 
 interface InputProps {
   id: string;

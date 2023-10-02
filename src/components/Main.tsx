@@ -1,11 +1,11 @@
-import MainInputs from "./MainInputs";
-import AltGreetings from "./AltGreetings";
+import MainInputs from "./sections/MainInputs";
+import AltGreetings from "./sections/AltGreetings";
 
 export default function Main() {
   return (
-    <div className="px-40">
+    <main className="px-40">
       <MainInputs />
       <AltGreetings />
-    </div>
+    </main>
   );
 }
