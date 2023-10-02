@@ -37,11 +37,11 @@ export default function AltGreetings() {
 
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
-    <section className="pt-14">
+    <section className="">
       <div className="mb-10 text-4xl font-semibold">Alternative Greetings</div>
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet) => (
-          <div className="flex gap-5" key={altGreet.id}>
+          <div className="flex gap-10" key={altGreet.id}>
             <Input id={altGreet.id} inputable={altGreet} />
             <div className="flex items-center">
               <button
@@ -54,10 +54,10 @@ export default function AltGreetings() {
           </div>
         ))}
       </div>
-      <div>
+      <div className="flex justify-end">
         <button
           onClick={handleAddGreet}
-          className="mt-5 p-5 rounded-xl bg-black hover:bg-gray-600 text-xl text-white"
+          className="mt-6 p-5 rounded-xl bg-black hover:bg-gray-600 text-xl text-white"
         >
           Add Alternate Greetings
         </button>
