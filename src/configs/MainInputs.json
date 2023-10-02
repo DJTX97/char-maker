@@ -1,3 +1,11 @@
 {
-    "MainInputs": ["Name", "Description", "Personality", "Scenario", "ExampleMessages", "Greeting"]
+  "MainInputs": [
+    { "id": "name", "name": "Name", "value": "" },
+    { "id": "description", "name": "Description", "value": "" },
+    { "id": "personality", "name": "Personality", "value": "" },
+    { "id": "mes_example", "name":"Example Messages", "value": "" },
+    { "id": "scenario", "name":"Scenario", "value": "" },
+    { "id": "first_mes", "name":"Greeting", "value": "" }
+  ],
+  "AltGreetings": []
 }

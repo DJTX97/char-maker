@@ -1,24 +1,44 @@
 import { useState, useEffect, useRef } from "react";
 import { useAtom } from "jotai";
-import { mainInputStore } from "../data/MainStore";
+import {
+  mainInputStore,
+  mainInputType,
+  altGreetStore,
+} from "../data/MainStore";
 
 interface InputProps {
   id: string;
-  val?: string;
+  name?: string;
 }
 
-export default function Input({ id, val }: InputProps) {
+export default function Input({ id, name }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaValue, setTextareaValue] = useState("");
   const [mainInputs, setMainInputs] = useAtom(mainInputStore);
+  const [altGreets, setAltGreets] = useAtom(altGreetStore);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextareaValue(event.target.value);
-    setMainInputs((prev: any) => ({
-      ...prev,
-      [id]: event.target.value,
-    }))
+    //Persist event.target to access it asynchronously and keep state in sync with the actual data
+    event.persist();
+    const newValue = event.target.value;
+    setTextareaValue(newValue);
+    
+    if (mainInputs.map(input => input.id).includes(id)) {
+      setMainInputs(prevMainInputs =>
+        prevMainInputs.map((input) =>
+          input.id === id ? { ...input, value: newValue } : input
+        )
+      );
+    } else if (altGreets.map(altGreet => altGreet.id).includes(id)) {
+      setAltGreets(prevAltGreets =>
+        prevAltGreets.map((altGreet) =>
+          altGreet.id === id ? { ...altGreet, value: newValue } : altGreet
+        )
+      );
+    }
   };
+
+  
 
   // Autosize textarea to fit content
   useEffect(() => {
@@ -30,7 +50,7 @@ export default function Input({ id, val }: InputProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="text-2xl font-semibold">{id}</div>
+      <div className="text-2xl font-semibold">{name}</div>
       <textarea
         id={id}
         ref={textareaRef}

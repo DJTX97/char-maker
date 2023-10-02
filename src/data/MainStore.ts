@@ -1,8 +1,20 @@
 import { atom } from "jotai";
-import { MainInputs } from "../configs/MainInputs.json";
+import { MainInputs, AltGreetings } from "../configs/MainInputs.json";
 
-const mainInputs = Object.fromEntries(MainInputs.map((key) => [key, ""]));
+export interface mainInputType {
+    id: string;
+    name: string;
+    value: string;
+}
+
+export interface altGreetType {
+    id: string;
+    name: string;
+    value: string;
+}
+
+const mainInputs: mainInputType[] = MainInputs
 export const mainInputStore = atom(mainInputs);
 
-const altGreets: string[] = [];
+const altGreets: altGreetType[] = AltGreetings
 export const altGreetStore = atom(altGreets);
