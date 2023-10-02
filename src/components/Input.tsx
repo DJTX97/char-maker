@@ -2,16 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { useAtom } from "jotai";
 import {
   mainInputStore,
-  mainInputType,
   altGreetStore,
+  altGreetType
 } from "../data/MainStore";
 
 interface InputProps {
   id: string;
   name?: string;
+  inputable?: altGreetType;
 }
 
-export default function Input({ id, name }: InputProps) {
+export default function Input({ id, name, inputable }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaValue, setTextareaValue] = useState("");
   const [mainInputs, setMainInputs] = useAtom(mainInputStore);
@@ -22,23 +23,21 @@ export default function Input({ id, name }: InputProps) {
     event.persist();
     const newValue = event.target.value;
     setTextareaValue(newValue);
-    
-    if (mainInputs.map(input => input.id).includes(id)) {
-      setMainInputs(prevMainInputs =>
+
+    if (mainInputs.map((input) => input.id).includes(id)) {
+      setMainInputs((prevMainInputs) =>
         prevMainInputs.map((input) =>
           input.id === id ? { ...input, value: newValue } : input
         )
       );
-    } else if (altGreets.map(altGreet => altGreet.id).includes(id)) {
-      setAltGreets(prevAltGreets =>
+    } else if (altGreets.map((altGreet) => altGreet.id).includes(id)) {
+      setAltGreets((prevAltGreets) =>
         prevAltGreets.map((altGreet) =>
           altGreet.id === id ? { ...altGreet, value: newValue } : altGreet
         )
       );
     }
   };
-
-  
 
   // Autosize textarea to fit content
   useEffect(() => {
@@ -49,10 +48,11 @@ export default function Input({ id, name }: InputProps) {
   }, [textareaValue]);
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="text-2xl font-semibold">{name}</div>
+    <div className="w-full flex flex-col gap-3">
+      <div className="text-2xl font-semibold">{inputable? inputable.name : name}</div>
       <textarea
         id={id}
+        name={id}
         ref={textareaRef}
         rows={1}
         value={textareaValue}

@@ -18,3 +18,5 @@ export const mainInputStore = atom(mainInputs);
 
 const altGreets: altGreetType[] = AltGreetings
 export const altGreetStore = atom(altGreets);
+
+export const inputValue = atom("");
