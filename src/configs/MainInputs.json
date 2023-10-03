@@ -6,6 +6,5 @@
     { "id": "mes_example", "name":"Example Messages", "value": "" },
     { "id": "scenario", "name":"Scenario", "value": "" },
     { "id": "first_mes", "name":"Greeting", "value": "" }
-  ],
-  "AltGreetings": []
+  ]
 }

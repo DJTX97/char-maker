@@ -1,5 +1,6 @@
 import { atom } from "jotai";
-import { MainInputs, AltGreetings } from "../configs/MainInputs.json";
+import { loreBookEntry } from "../interfaces/CharCardSchema";
+import { MainInputs } from "../configs/MainInputs.json";
 
 export interface mainInputType {
     id: string;
@@ -13,10 +14,13 @@ export interface altGreetType {
     value: string;
 }
 
+
+
 const mainInputs: mainInputType[] = MainInputs
 export const mainInputStore = atom(mainInputs);
 
-const altGreets: altGreetType[] = AltGreetings
+const altGreets: altGreetType[] = [];
 export const altGreetStore = atom(altGreets);
 
-export const inputValue = atom("");
+const lorebook: loreBookEntry[] = [];
+export const loreBookStore = atom(lorebook);

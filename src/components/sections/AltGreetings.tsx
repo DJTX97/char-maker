@@ -1,7 +1,8 @@
-import Input from "../microComps/Input";
 import { useAtom } from "jotai/react";
 import { altGreetStore, altGreetType } from "../../data/MainStore";
 import { useEffect } from "react";
+import SectionButton from "../generalComps/SectionButton";
+import AltGreetInput from "../generalComps/AltGreetInput";
 
 export default function AltGreetings() {
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
@@ -42,7 +43,11 @@ export default function AltGreetings() {
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet) => (
           <div className="flex gap-10" key={altGreet.id}>
-            <Input id={altGreet.id} inputable={altGreet} />
+            <AltGreetInput
+              key={altGreet.id}
+              id={altGreet.id}
+              name={altGreet.name}
+            />
             <div className="flex items-center">
               <button
                 onClick={() => handleRemoveGreet(altGreet.id)}
@@ -54,14 +59,7 @@ export default function AltGreetings() {
           </div>
         ))}
       </div>
-      <div className="flex justify-end">
-        <button
-          onClick={handleAddGreet}
-          className="mt-6 p-5 rounded-xl bg-black hover:bg-gray-600 text-xl text-white"
-        >
-          Add Alternate Greetings
-        </button>
-      </div>
+      <SectionButton handler={handleAddGreet} name="Add Alternative Greeting" />
     </section>
   );
 }
