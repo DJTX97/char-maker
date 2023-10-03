@@ -32,13 +32,13 @@ export default function AltGreetings() {
     });
   };
 
-  useEffect(() => {
-    console.log(altGreets);
-  }, [altGreets]);
+  // useEffect(() => {
+  //   console.log(altGreets);
+  // }, [altGreets]);
 
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
-    <section className="">
+    <section>
       <div className="mb-10 text-4xl font-semibold">Alternative Greetings</div>
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet) => (

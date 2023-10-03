@@ -19,15 +19,39 @@ export default function LorebookInput({
   const [loreEntries, setLoreEntries] = useAtom(loreBookStore);
 
   return (
-    <div>
-      <div>{name}</div>
-      <div className="flex">
-        <Input id={uuidv4()} name={"Primary Keys"} val="" changeHandler={() => {}} />
-        <Input id={uuidv4()} name={"Secondary Keys"} val="" changeHandler={() => {}} />
+    <div className="flex flex-col gap-5 w-full">
+      <div className="text-2xl font-semibold">{name}</div>
+      <div className="flex gap-5">
+        <Input
+          id={uuidv4()}
+          name={"Primary Keys"}
+          nameSize="text-xl"
+          val=""
+          changeHandler={() => {}}
+        />
+        <Input
+          id={uuidv4()}
+          name={"Secondary Keys"}
+          nameSize="text-xl"
+          val=""
+          changeHandler={() => {}}
+        />
       </div>
-      <div className="flex flex-col">
-        <Input id={uuidv4()} name={"Content"} val="" changeHandler={() => {}}/>
-        <Input id={uuidv4()} name={"Comment"} val="" changeHandler={() => {}}/>
+      <div className="flex flex-col gap-5">
+        <Input
+          id={uuidv4()}
+          name={"Content"}
+          nameSize="text-xl"
+          val=""
+          changeHandler={() => {}}
+        />
+        <Input
+          id={uuidv4()}
+          name={"Comment"}
+          nameSize="text-xl"
+          val=""
+          changeHandler={() => {}}
+        />
       </div>
     </div>
   );
