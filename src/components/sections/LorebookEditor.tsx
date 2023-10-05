@@ -5,72 +5,123 @@ import { loreBookEntry } from "../../interfaces/CharCardSchema";
 import LorebookInput from "../generalComps/LorebookInput";
 import SectionButton from "../generalComps/SectionButton";
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "../../utils/customHooks/useLocalStorage";
+
+// {
+//   id: 1, //dynamic from 1
+//   keys: [],
+//   secondary_keys: [],
+//   comment: "",
+//   content: "",
+//   constant: false,
+//   selective: false,
+//   insertion_order: 0,
+//   enabled: true,
+//   position: "",
+//   extensions: {
+//     position: 0,
+//     exclude_recursion: false,
+//     display_index: 0, //dynamic from 0
+//     probability: 100,
+//     useProbability: true,
+//   },
+// }
 
 export default function LorebookEditor() {
-  const [loreEntries, setLoreEntries] = useAtom(loreBookStore);
-  const [entryCount, setEntryCount] = useState(1);
+  const [entries, setEntries] = useAtom(loreBookStore);
 
-  const handleAddLoreEntry = () => {
-    setLoreEntries((prevLoreEntries: loreBookEntry[]) => [
-      ...prevLoreEntries,
-      {
-        id: entryCount,
-        keys: [],
-        secondary_keys: [],
-        comment: "",
-        content: "",
-        constant: false,
-        selective: false,
-        insertion_order: 0,
-        enabled: true,
-        position: "",
-        extensions: {
-          position: 0,
-          exclude_recursion: false,
-          display_index: entryCount - 1,
-          probability: 100,
-          useProbability: true,
-        },
+  const [KEYS, setKEYS] = useState<string[]>([]);
+
+  const [counter, setCounter] = useState(1);
+
+  const [ID, setID] = useState({
+    keys: `keys-${uuidv4()}`,
+    secondary_keys: `secondary_keys-${uuidv4()}`,
+    comment: `comment-${uuidv4()}`,
+    content: `content-${uuidv4()}`,
+  });
+
+  const addEntry = () => {
+    const newEntry = {
+      id: counter,
+      keys: [],
+      secondary_keys: [],
+      comment: "",
+      content: "",
+      constant: false,
+      selective: false,
+      insertion_order: 0,
+      enabled: true,
+      position: "",
+      extensions: {
+        position: 0,
+        exclude_recursion: false,
+        display_index: counter - 1, //dynamic from 0
+        probability: 100,
+        useProbability: true,
       },
-    ]);
-    setEntryCount((prev) => prev + 1);
+    };
+    setCounter((prev) => prev + 1);
+    setKEYS([...KEYS, uuidv4()]);
+    setEntries([...entries, newEntry]);
   };
 
-  const handleRemoveEntry = (index:number) => {
-    setLoreEntries((prevEntries: loreBookEntry[]) =>
-      prevEntries.filter((entry) => entry.id - 1 !== index)
-    );
-    setEntryCount(loreEntries.length);
-    // Reset properties for all other items after deleting an entry
-    setLoreEntries((prevEntries: loreBookEntry[]) => {
-      return prevEntries.map((entry, i) => {
-        entry.id = i + 1
-        entry.extensions.display_index = i
-        return entry;
-      });
-    });
+  const removeEntry = (index: number) => {
+    let newEntries = [...entries];
+
+    const newKEYS = [...KEYS];
+    newEntries.splice(index, 1);
+    newKEYS.splice(index, 1);
+    newEntries = newEntries.map((item, i) => {
+      item.id = i + 1;
+      item.extensions.display_index = i;
+      return item;
+    })
+    setEntries(newEntries);
+    setKEYS(newKEYS);
+    // setEntries((prev) => {
+
+    //   return prev.map((item, i) => {
+    //     item.id = i + 1;
+    //     item.extensions.display_index = i;
+    //     return item;
+    //   });
+    // });
+
+    setCounter((prev) => prev - 1);
   };
 
-  useEffect(() => {
-    console.log(loreEntries);
-  }, [loreEntries]);
+  // useEffect(() => {
+  //   console.log(entries);
+  // }, [entries]);
+
   return (
     <section>
-      <div className="mb-10 text-4xl font-semibold">Lorebook Editor</div>
+      <div className="flex justify-between mb-10 text-4xl font-semibold">
+        <div>Lorebook</div>
+        <button
+          onClick={() => {}}
+          className="p-3 rounded-full bg-black hover:bg-gray-600 text-xl text-white"
+        >
+          Save
+        </button>
+      </div>
       <div className="flex flex-col gap-20">
-        {loreEntries.map((loreEntry, index) => {
-          const id = uuidv4();
-          const name = `Entry ${index + 1}`;
+        {entries.map((item: loreBookEntry, index: number) => {
+          //const KEY = uuidv4();
           return (
-            <div key={uuidv4()} className="flex items-start">
+            <div key={KEYS[index]} className="relative">
               <LorebookInput
-                id={id}
-                name={name}
-                inputable={loreEntry}
+                id={ID}
+                //key={KEY}
+                index={index}
+                name={`Entry ${index + 1}`}
+                inputable={item}
               />
-              <div className="flex items-center">
+
+              <div className="absolute top-0 right-0 flex items-center">
                 <button
-                  onClick={() => handleRemoveEntry(index)}
+                  onClick={() => removeEntry(index)}
                   className="p-3 rounded-full bg-black hover:bg-gray-600 text-white"
                 >
                   Delete
@@ -80,7 +131,7 @@ export default function LorebookEditor() {
           );
         })}
       </div>
-      <SectionButton handler={handleAddLoreEntry} name="Add Lore Entry" />
+      <SectionButton handler={addEntry} name="Add Lore Entry" />
     </section>
   );
 }

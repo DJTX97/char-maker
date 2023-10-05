@@ -22,5 +22,8 @@ export const mainInputStore = atom(mainInputs);
 const altGreets: altGreetType[] = [];
 export const altGreetStore = atom(altGreets);
 
+// const loreTempStorage: loreBookEntry[] = [];
+// export const loreTempStore = atom(loreTempStorage);
+
 const lorebook: loreBookEntry[] = [];
 export const loreBookStore = atom(lorebook);

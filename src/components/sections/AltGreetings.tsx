@@ -32,9 +32,9 @@ export default function AltGreetings() {
     });
   };
 
-  // useEffect(() => {
-  //   console.log(altGreets);
-  // }, [altGreets]);
+  useEffect(() => {
+    console.log(altGreets);
+  }, [altGreets]);
 
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
@@ -44,7 +44,7 @@ export default function AltGreetings() {
         {altGreets.map((altGreet) => (
           <div className="flex gap-10" key={altGreet.id}>
             <AltGreetInput
-              key={altGreet.id}
+              //key={altGreet.id}
               id={altGreet.id}
               name={altGreet.name}
             />
