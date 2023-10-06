@@ -68,39 +68,51 @@ export default function LorebookInput({
   //   console.log(loreEntries);
   // }, [inputable, loreEntries.length]);
   return (
-    <div className="flex flex-col gap-5 w-full">
+    <div className="flex flex-col gap-5">
       <div className="text-2xl font-semibold">{name}</div>
-      <div className="flex gap-5">
-        <Input
-          id={id.keys}
-          name="Primary Keys"
-          nameSize="text-xl"
-          val={inputs.keys}
-          changeHandler={(event) => handleValueChange(event, id.keys)}
-        />
-        <Input
-          id={id.secondary_keys}
-          name="Secondary Keys"
-          nameSize="text-xl"
-          val={inputs.secondary_keys}
-          changeHandler={(event) => handleValueChange(event, id.secondary_keys)}
-        />
-      </div>
-      <div className="flex flex-col gap-5">
-        <Input
-          id={id.content}
-          name="Content"
-          nameSize="text-xl"
-          val={inputs.content}
-          changeHandler={(event) => handleValueChange(event, id.content)}
-        />
-        <Input
-          id={id.comment}
-          name="Comment"
-          nameSize="text-xl"
-          val={inputs.comment}
-          changeHandler={(event) => handleValueChange(event, id.comment)}
-        />
+      <div className="flex gap-10">
+        <div>
+          <select name="select" id="">
+            <option value="before_char">before_char</option>
+            <option value="after_char">after_char</option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-5 w-full">
+          <div className="flex gap-5">
+            <Input
+              id={id.keys}
+              name="Primary Keys"
+              nameSize="text-xl"
+              val={inputs.keys}
+              changeHandler={(event) => handleValueChange(event, id.keys)}
+            />
+            <Input
+              id={id.secondary_keys}
+              name="Secondary Keys"
+              nameSize="text-xl"
+              val={inputs.secondary_keys}
+              changeHandler={(event) =>
+                handleValueChange(event, id.secondary_keys)
+              }
+            />
+          </div>
+          <div className="flex flex-col gap-5">
+            <Input
+              id={id.content}
+              name="Content"
+              nameSize="text-xl"
+              val={inputs.content}
+              changeHandler={(event) => handleValueChange(event, id.content)}
+            />
+            <Input
+              id={id.comment}
+              name="Comment"
+              nameSize="text-xl"
+              val={inputs.comment}
+              changeHandler={(event) => handleValueChange(event, id.comment)}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
