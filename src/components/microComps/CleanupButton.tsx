@@ -1,6 +1,4 @@
-import { SetStateAction } from "react";
-import { loreBookEntry } from "../../interfaces/CharCardSchema";
-import { altGreetType } from "../../data/MainStore";
+
 
 interface CleanupButtonProps {
   cleanupMethod: () => void;

@@ -21,26 +21,27 @@ export default function LorebookEditor() {
 
   const [counter, setCounter] = useState(1);
 
+  const newEntry = {
+    id: counter, //dynamic starting from 1
+    keys: [],
+    secondary_keys: [],
+    comment: "",
+    content: "",
+    constant: false, // default false
+    selective: true,
+    insertion_order: 0,
+    enabled: true,
+    position: "before_char", //default: before_char, other: after_char
+    extensions: {
+      position: 0,
+      exclude_recursion: false,
+      display_index: counter - 1, //dynamic starting from 0
+      probability: 100,
+      useProbability: true,
+    },
+  };
+
   const addEntry = () => {
-    const newEntry = {
-      id: counter, //dynamic starting from 1
-      keys: [],
-      secondary_keys: [],
-      comment: "",
-      content: "",
-      constant: false,
-      selective: false,
-      insertion_order: 0,
-      enabled: true,
-      position: "",
-      extensions: {
-        position: 0,
-        exclude_recursion: false,
-        display_index: counter - 1, //dynamic starting from 0
-        probability: 100,
-        useProbability: true,
-      },
-    };
     setCounter((prev) => prev + 1);
     setKEYS([...KEYS, uuidv4()]);
     setEntries([...entries, newEntry]);
