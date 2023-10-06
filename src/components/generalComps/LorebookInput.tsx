@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { loreBookStore } from "../../data/MainStore";
 import { loreBookEntry } from "../../interfaces/CharCardSchema";
@@ -64,9 +64,9 @@ export default function LorebookInput({
     }
   };
 
-  useEffect(() => {
-    console.log(loreEntries);
-  }, [inputable, loreEntries.length]);
+  // useEffect(() => {
+  //   console.log(loreEntries);
+  // }, [inputable, loreEntries.length]);
   return (
     <div className="flex flex-col gap-5 w-full">
       <div className="text-2xl font-semibold">{name}</div>

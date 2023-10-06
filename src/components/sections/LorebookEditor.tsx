@@ -1,18 +1,15 @@
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 import { useAtom } from "jotai";
+import { v4 as uuidv4 } from "uuid";
 import { loreBookStore } from "../../data/MainStore";
 import { loreBookEntry } from "../../interfaces/CharCardSchema";
 import LorebookInput from "../generalComps/LorebookInput";
 import SectionButton from "../generalComps/SectionButton";
-import { useState } from "react";
-
 
 export default function LorebookEditor() {
   const [entries, setEntries] = useAtom(loreBookStore);
 
   const [KEYS, setKEYS] = useState<string[]>([]);
-
-  const [counter, setCounter] = useState(1);
 
   const [ID, setID] = useState({
     keys: `keys-${uuidv4()}`,
@@ -20,6 +17,8 @@ export default function LorebookEditor() {
     comment: `comment-${uuidv4()}`,
     content: `content-${uuidv4()}`,
   });
+
+  const [counter, setCounter] = useState(1);
 
   const addEntry = () => {
     const newEntry = {
@@ -48,18 +47,19 @@ export default function LorebookEditor() {
 
   const removeEntry = (index: number) => {
     let newEntries = [...entries];
-
     const newKEYS = [...KEYS];
+
     newEntries.splice(index, 1);
     newKEYS.splice(index, 1);
+
     newEntries = newEntries.map((item, i) => {
       item.id = i + 1;
       item.extensions.display_index = i;
       return item;
     });
-    setEntries(newEntries);
+
     setKEYS(newKEYS);
-    
+    setEntries(newEntries);
 
     setCounter((prev) => prev - 1);
   };
@@ -91,14 +91,18 @@ export default function LorebookEditor() {
                   onClick={() => removeEntry(index)}
                   className="p-3 rounded-full bg-black hover:bg-gray-600 text-white"
                 >
-                  Delete
+                  Remove
                 </button>
               </div>
             </div>
           );
         })}
       </div>
-      <SectionButton handler={addEntry} name="Add Lore Entry" />
+      <SectionButton
+        destinations={entries}
+        handler={addEntry}
+        name="Add Lore Entry"
+      />
     </section>
   );
 }

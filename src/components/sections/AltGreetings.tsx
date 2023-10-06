@@ -44,7 +44,6 @@ export default function AltGreetings() {
         {altGreets.map((altGreet) => (
           <div className="flex gap-10" key={altGreet.id}>
             <AltGreetInput
-              //key={altGreet.id}
               id={altGreet.id}
               name={altGreet.name}
             />
@@ -59,7 +58,7 @@ export default function AltGreetings() {
           </div>
         ))}
       </div>
-      <SectionButton handler={handleAddGreet} name="Add Alternative Greeting" />
+      <SectionButton destinations={altGreets} handler={handleAddGreet} name="Add Alternative Greeting" />
     </section>
   );
 }
