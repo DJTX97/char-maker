@@ -1,8 +1,9 @@
 import { useAtom } from "jotai/react";
 import { altGreetStore, altGreetType } from "../../data/MainStore";
 import { useEffect } from "react";
-import SectionButton from "../generalComps/SectionButton";
+import SectionButton from "../microComps/SectionButton";
 import AltGreetInput from "../generalComps/AltGreetInput";
+import CleanupButton from "../microComps/CleanupButton";
 
 export default function AltGreetings() {
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
@@ -32,6 +33,10 @@ export default function AltGreetings() {
     });
   };
 
+  const emptyStore = () => {
+    setAltGreets([]);
+  }
+
   useEffect(() => {
     console.log(altGreets);
   }, [altGreets]);
@@ -39,7 +44,10 @@ export default function AltGreetings() {
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
     <section>
-      <div className="mb-10 text-4xl font-semibold">Alternative Greetings</div>
+      <div className="flex justify-between mb-10 text-4xl font-semibold">
+        <div>Alternative Greetings</div>
+        <CleanupButton cleanupMethod={emptyStore} />
+      </div>
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet) => (
           <div className="flex gap-10" key={altGreet.id}>
@@ -58,7 +66,7 @@ export default function AltGreetings() {
           </div>
         ))}
       </div>
-      <SectionButton destinations={altGreets} handler={handleAddGreet} name="Add Alternative Greeting" />
+      <SectionButton destinations={altGreets} handler={handleAddGreet} name="Add Greeting" />
     </section>
   );
 }

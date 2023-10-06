@@ -1,8 +1,7 @@
-import Input from "../generalComps/OldInput";
-import MainInput from "../generalComps/OldInput";
+//import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { mainInputStore } from "../../data/MainStore";
-import { useEffect } from "react";
+import MainInput from "../generalComps/MainInput";
 
 export default function MainInputs() {
   const [mainInputs] = useAtom(mainInputStore);
@@ -10,7 +9,6 @@ export default function MainInputs() {
   // useEffect(() => {
   //   console.log(mainInputs);
   // }, [mainInputs]);
-
 
   return (
     <section className="flex flex-col gap-5">

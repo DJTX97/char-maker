@@ -13,7 +13,7 @@ export default function SectionButton({
 }: SectionButtonProps) {
   
   useEffect(() => {
-    if (destinations) {
+    if (destinations && destinations.length > 0) {
       const scrollDest = document.getElementById(name);
 
       if (scrollDest) {
@@ -25,6 +25,15 @@ export default function SectionButton({
       }
     }
   }, [destinations]);
+
+  //scroll to top on re-render
+  // useEffect(() => {
+  //   if (history.scrollRestoration) {
+  //     history.scrollRestoration = "manual";
+  //   } else {
+  //     window.scrollTo(0, 0);
+  //   }
+  // }, []);
 
   return (
     <div className="flex justify-end" id={name}>

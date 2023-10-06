@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { loreBookStore } from "../../data/MainStore";
 import { loreBookEntry } from "../../interfaces/CharCardSchema";
 import LorebookInput from "../generalComps/LorebookInput";
-import SectionButton from "../generalComps/SectionButton";
+import SectionButton from "../microComps/SectionButton";
+import CleanupButton from "../microComps/CleanupButton";
 
 export default function LorebookEditor() {
   const [entries, setEntries] = useAtom(loreBookStore);
@@ -64,16 +65,15 @@ export default function LorebookEditor() {
     setCounter((prev) => prev - 1);
   };
 
+  const emptyStore = () => {
+    setEntries([]);
+  };
+
   return (
     <section>
       <div className="flex justify-between mb-10 text-4xl font-semibold">
         <div>Lorebook</div>
-        <button
-          onClick={() => {}}
-          className="p-3 rounded-full bg-black hover:bg-gray-600 text-xl text-white"
-        >
-          Save
-        </button>
+        <CleanupButton cleanupMethod={emptyStore} />
       </div>
       <div className="flex flex-col gap-20">
         {entries.map((item: loreBookEntry, index: number) => {
@@ -101,7 +101,7 @@ export default function LorebookEditor() {
       <SectionButton
         destinations={entries}
         handler={addEntry}
-        name="Add Lore Entry"
+        name="Add Entry"
       />
     </section>
   );

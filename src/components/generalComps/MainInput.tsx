@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { mainInputStore } from "../../data/MainStore";
 import Input from "../microComps/Input";
