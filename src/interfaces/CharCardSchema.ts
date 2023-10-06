@@ -18,6 +18,7 @@ export interface loreBookEntry {
   };
 }
 
+//Data to be exported as json or to be encoded in input file
 export interface CharCardSchema {
   spec: string; // "chara_card_v2"
   spec_version: string; // "2.0"

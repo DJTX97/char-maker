@@ -4,28 +4,8 @@ import { loreBookStore } from "../../data/MainStore";
 import { loreBookEntry } from "../../interfaces/CharCardSchema";
 import LorebookInput from "../generalComps/LorebookInput";
 import SectionButton from "../generalComps/SectionButton";
-import { useEffect, useState } from "react";
-import { useLocalStorage } from "../../utils/customHooks/useLocalStorage";
+import { useState } from "react";
 
-// {
-//   id: 1, //dynamic from 1
-//   keys: [],
-//   secondary_keys: [],
-//   comment: "",
-//   content: "",
-//   constant: false,
-//   selective: false,
-//   insertion_order: 0,
-//   enabled: true,
-//   position: "",
-//   extensions: {
-//     position: 0,
-//     exclude_recursion: false,
-//     display_index: 0, //dynamic from 0
-//     probability: 100,
-//     useProbability: true,
-//   },
-// }
 
 export default function LorebookEditor() {
   const [entries, setEntries] = useAtom(loreBookStore);
@@ -43,7 +23,7 @@ export default function LorebookEditor() {
 
   const addEntry = () => {
     const newEntry = {
-      id: counter,
+      id: counter, //dynamic starting from 1
       keys: [],
       secondary_keys: [],
       comment: "",
@@ -56,7 +36,7 @@ export default function LorebookEditor() {
       extensions: {
         position: 0,
         exclude_recursion: false,
-        display_index: counter - 1, //dynamic from 0
+        display_index: counter - 1, //dynamic starting from 0
         probability: 100,
         useProbability: true,
       },
@@ -76,24 +56,13 @@ export default function LorebookEditor() {
       item.id = i + 1;
       item.extensions.display_index = i;
       return item;
-    })
+    });
     setEntries(newEntries);
     setKEYS(newKEYS);
-    // setEntries((prev) => {
-
-    //   return prev.map((item, i) => {
-    //     item.id = i + 1;
-    //     item.extensions.display_index = i;
-    //     return item;
-    //   });
-    // });
+    
 
     setCounter((prev) => prev - 1);
   };
-
-  // useEffect(() => {
-  //   console.log(entries);
-  // }, [entries]);
 
   return (
     <section>
@@ -108,12 +77,10 @@ export default function LorebookEditor() {
       </div>
       <div className="flex flex-col gap-20">
         {entries.map((item: loreBookEntry, index: number) => {
-          //const KEY = uuidv4();
           return (
             <div key={KEYS[index]} className="relative">
               <LorebookInput
                 id={ID}
-                //key={KEY}
                 index={index}
                 name={`Entry ${index + 1}`}
                 inputable={item}

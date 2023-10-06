@@ -1,7 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
-import { useLocalStorage } from "../../utils/customHooks/useLocalStorage";
 import { loreBookStore } from "../../data/MainStore";
 import { loreBookEntry } from "../../interfaces/CharCardSchema";
 import Input from "../microComps/Input";
@@ -13,20 +11,18 @@ interface LorebookInputProps {
     comment: string;
     content: string;
   };
-  index: number;
+  index?: number;
   name?: string;
   inputable: loreBookEntry;
 }
 
 export default function LorebookInput({
   id,
-  index,
   name,
   inputable,
 }: LorebookInputProps) {
   const [loreEntries, setLoreEntries] = useAtom(loreBookStore);
 
-  //const [entry, setEntry] = useState(inputable);
   const [inputs, setInputs] = useState({
     keys: "",
     secondary_keys: "",
@@ -34,53 +30,39 @@ export default function LorebookInput({
     content: "",
   });
 
-  const handlePrimaryKeyChanges = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+  const handleValueChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+    ID: string
   ) => {
+    //Get property identifier from ID
+    const identifier = ID.split("-")[0];
+
+    //Persist event.target to access it asynchronously and keep state in sync with the actual data
     event.persist();
     const newValue = event.target.value;
-    setInputs((prev) => ({ ...prev, keys: newValue }));
+    setInputs((prev) => ({ ...prev, [identifier]: newValue }));
 
-    //setEntry((prev) => ({ ...prev, keys: newValue.split(",") }));
-
-    // setLoreEntries((prev) => {
-    //   return prev.map((loreEntry) => {
-    //     if (loreEntry.id === entry.id) {
-    //       return entry;
-    //     }
-    //     return loreEntry;
-    //   });
-    // })
-
-    setLoreEntries((prev) => {
-      return prev.map((loreEntry) => {
-        if (loreEntry.id === inputable.id) {
-          return { ...loreEntry, keys: newValue.split(",") };
-        }
-        return loreEntry;
+    //Store the specific keys as arrays and the other inputs as strings
+    if (ID === id.keys || ID === id.secondary_keys) {
+      setLoreEntries((prev) => {
+        return prev.map((loreEntry) => {
+          if (loreEntry.id === inputable.id) {
+            return { ...loreEntry, [identifier]: newValue.split(",") };
+          }
+          return loreEntry;
+        });
       });
-    });
+    } else {
+      setLoreEntries((prev) => {
+        return prev.map((loreEntry) => {
+          if (loreEntry.id === inputable.id) {
+            return { ...loreEntry, [identifier]: newValue };
+          }
+          return loreEntry;
+        });
+      });
+    }
   };
-
-  // useEffect(() => {
-  //   const primaryKeys = inputs.keys.split(",");
-  //   setEntry((prev) => ({ ...prev, keys: primaryKeys }));
-  // }, [inputs]);
-
-  // useEffect(() => {
-  //   setLoreEntries((prev) => {
-  //     return prev.map((loreEntry) => {
-  //       if (loreEntry.id === entry.id) {
-  //         return entry;
-  //       }
-  //       return loreEntry;
-  //     });
-  //   });
-  // }, [inputs]);
-
-  // useEffect(() => {
-  //   console.log(inputable);
-  // }, Object.values(inputable));
 
   useEffect(() => {
     console.log(loreEntries);
@@ -91,33 +73,33 @@ export default function LorebookInput({
       <div className="flex gap-5">
         <Input
           id={id.keys}
-          name={"Primary Keys"}
+          name="Primary Keys"
           nameSize="text-xl"
           val={inputs.keys}
-          changeHandler={handlePrimaryKeyChanges}
+          changeHandler={(event) => handleValueChange(event, id.keys)}
         />
         <Input
           id={id.secondary_keys}
-          name={"Secondary Keys"}
+          name="Secondary Keys"
           nameSize="text-xl"
           val={inputs.secondary_keys}
-          changeHandler={() => {}}
+          changeHandler={(event) => handleValueChange(event, id.secondary_keys)}
         />
       </div>
       <div className="flex flex-col gap-5">
         <Input
           id={id.content}
-          name={"Content"}
+          name="Content"
           nameSize="text-xl"
           val={inputs.content}
-          changeHandler={() => {}}
+          changeHandler={(event) => handleValueChange(event, id.content)}
         />
         <Input
           id={id.comment}
-          name={"Comment"}
+          name="Comment"
           nameSize="text-xl"
           val={inputs.comment}
-          changeHandler={() => {}}
+          changeHandler={(event) => handleValueChange(event, id.comment)}
         />
       </div>
     </div>
