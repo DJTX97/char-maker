@@ -5,12 +5,13 @@ interface InputProps {
   id: string;
   name?: string;
   nameSize?: string; //font size based on tailwind syntax
+  placeholder?: string;
   val: string;
   changeHandler: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   width?: string; //width value based on tailwind syntax
 }
 
-export default function Input({ id, name, nameSize, val, changeHandler, width }: InputProps) {
+export default function Input({ id, name, nameSize, placeholder, val, changeHandler, width }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
   // Autosize textarea to fit content
@@ -28,6 +29,7 @@ export default function Input({ id, name, nameSize, val, changeHandler, width }:
         id={id}
         ref={textareaRef}
         rows={1}
+        placeholder={placeholder ?? ""}
         value={val}
         onChange={changeHandler}
         className={`${width && width} p-2 rounded-lg resize-none overflow-hidden`}

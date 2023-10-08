@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { loreBookStore } from "../../data/MainStore";
+import { entryStore, loreBookStore } from "../../data/MainStore";
 import { loreBookEntry } from "../../interfaces/CharCardSchema";
 import Input from "../microComps/Input";
 
@@ -10,6 +10,7 @@ interface LorebookInputProps {
     secondary_keys: string;
     comment: string;
     content: string;
+    position: string;
   };
   index?: number;
   name?: string;
@@ -21,42 +22,51 @@ export default function LorebookInput({
   name,
   inputable,
 }: LorebookInputProps) {
-  const [loreEntries, setLoreEntries] = useAtom(loreBookStore);
+  const [entries, setEntries] = useAtom(entryStore);
+  const [lorebook, setLorebook] = useAtom(loreBookStore);
 
   const [inputs, setInputs] = useState({
     keys: "",
     secondary_keys: "",
     comment: "",
     content: "",
+    position: "before_char",
   });
 
   const handleValueChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
+    event:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>,
     ID: string
   ) => {
     //Get property identifier from ID
     const identifier = ID.split("-")[0];
 
     //Persist event.target to access it asynchronously and keep state in sync with the actual data
-    event.persist();
-    const newValue = event.target.value;
-    setInputs((prev) => ({ ...prev, [identifier]: newValue }));
+    // event.persist();
+    // const newValue = event.target.value;
+    setInputs((prev) => ({ ...prev, [identifier]: event.target.value }));
 
     //Store the specific keys as arrays and the other inputs as strings
     if (ID === id.keys || ID === id.secondary_keys) {
-      setLoreEntries((prev) => {
+      setEntries((prev) => {
         return prev.map((loreEntry) => {
           if (loreEntry.id === inputable.id) {
-            return { ...loreEntry, [identifier]: newValue.split(",") };
+            return {
+              ...loreEntry,
+              [identifier]: event.target.value
+                .split(",")
+                .map((entry) => entry.trim()),
+            };
           }
           return loreEntry;
         });
       });
     } else {
-      setLoreEntries((prev) => {
+      setEntries((prev) => {
         return prev.map((loreEntry) => {
           if (loreEntry.id === inputable.id) {
-            return { ...loreEntry, [identifier]: newValue };
+            return { ...loreEntry, [identifier]: event.target.value };
           }
           return loreEntry;
         });
@@ -65,16 +75,21 @@ export default function LorebookInput({
   };
 
   // useEffect(() => {
-  //   console.log(loreEntries);
-  // }, [inputable, loreEntries.length]);
+  //   console.log(entries);
+  // }, [inputable, entries.length]);
   return (
     <div className="flex flex-col gap-5">
       <div className="text-2xl font-semibold">{name}</div>
       <div className="flex gap-10">
         <div>
-          <select name="select" id="">
-            <option value="before_char">before_char</option>
-            <option value="after_char">after_char</option>
+          <select
+            name="select"
+            id={id.position}
+            value={inputs.position}
+            onChange={(event) => handleValueChange(event, id.position)}
+          >
+            <option value="before_char">before character</option>
+            <option value="after_char">after character</option>
           </select>
         </div>
         <div className="flex flex-col gap-5 w-full">

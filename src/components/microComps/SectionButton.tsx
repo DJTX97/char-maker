@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface SectionButtonProps {
   name: string;
   handler: () => void;
-  destinations?: object[];
+  destinations: object[];
 }
 
 export default function SectionButton({
@@ -11,9 +11,10 @@ export default function SectionButton({
   name,
   destinations,
 }: SectionButtonProps) {
-  
+
+  const prevLengthRef = useRef(0); //track previous length of destinations array
   useEffect(() => {
-    if (destinations && destinations.length > 0) {
+    if (destinations.length > prevLengthRef.current) {
       const scrollDest = document.getElementById(name);
 
       if (scrollDest) {
@@ -24,7 +25,8 @@ export default function SectionButton({
         });
       }
     }
-  }, [destinations]);
+    prevLengthRef.current = destinations.length; //update previous length to current length
+  }, [destinations.length]);
 
   //scroll to top on re-render
   // useEffect(() => {
