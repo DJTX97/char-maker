@@ -11,10 +11,16 @@ export default function MainInputs() {
   // }, [mainInputs]);
 
   return (
-    <section className="flex flex-col gap-5">
-      {mainInputs.map((input, index) => (
-        <MainInput key={index} id={input.id} name={input.name} />
-      ))}
+    <section>
+      <div className="flex justify-between mb-10 text-4xl font-semibold">
+        <div>Bio</div>
+        {/* <CleanupButton cleanupMethod={emptyStore} /> */}
+      </div>
+      <div className="flex flex-col gap-5">
+        {mainInputs.map((input, index) => (
+          <MainInput key={index} id={input.id} name={input.name} />
+        ))}
+      </div>
     </section>
   );
 }

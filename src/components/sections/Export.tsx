@@ -2,8 +2,8 @@
 
 export default function Export() {
   return (
-    <div>
-      
-    </div>
+    <section>
+      Export
+    </section>
   )
 }
