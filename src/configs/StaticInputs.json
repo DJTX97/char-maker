@@ -1,0 +1,18 @@
+{
+  "MainInputs": [
+    { "id": "name", "name": "Name", "value": "" },
+    { "id": "description", "name": "Description", "value": "" },
+    { "id": "personality", "name": "Personality", "value": "" },
+    { "id": "mes_example", "name":"Example Messages", "value": "" },
+    { "id": "scenario", "name":"Scenario", "value": "" },
+    { "id": "first_mes", "name":"Greeting", "value": "" }
+  ],
+  "Metadata": [
+    { "id": "creator", "name": "Creator", "value": "" },
+    { "id": "character_version", "name": "Version", "value": "" },
+    { "id": "tags", "name": "Tags", "value": "" },
+    { "id": "creator_notes", "name":"Notes", "value": "" },
+    { "id": "system_prompt", "name":"System Prompt", "value": "" },
+    { "id": "post_history_instructions", "name":"Jailbreak", "value": "" }
+  ]
+}

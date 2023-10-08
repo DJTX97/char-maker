@@ -1,5 +1,5 @@
 import { useAtom } from "jotai/react";
-import { altGreetStore, altGreetType } from "../../data/MainStore";
+import { altGreetStore, AltGreetType } from "../../data/MainStore";
 import { useEffect } from "react";
 import SectionButton from "../microComps/SectionButton";
 import AltGreetInput from "../generalComps/AltGreetInput";
@@ -10,7 +10,7 @@ export default function AltGreetings() {
 
   const handleAddGreet = () => {
     const greetIndex = altGreets.length + 1;
-    setAltGreets((prevAltGreets: altGreetType[]) => [
+    setAltGreets((prevAltGreets: AltGreetType[]) => [
       ...prevAltGreets,
       {
         id: Date.now().toString(),
@@ -21,11 +21,11 @@ export default function AltGreetings() {
   };
 
   const handleRemoveGreet = (id: string) => {
-    setAltGreets((prevAltGreets: altGreetType[]) =>
+    setAltGreets((prevAltGreets: AltGreetType[]) =>
       prevAltGreets.filter((altGreet) => altGreet.id !== id)
     );
     // Rename greetings to "Alternative Greeting 1, 2, 3..." up to altGreet.length
-    setAltGreets((prevAltGreets: altGreetType[]) => {
+    setAltGreets((prevAltGreets: AltGreetType[]) => {
       return prevAltGreets.map((altGreet, i) => {
         altGreet.name = `Alternative Greeting ${i + 1}`;
         return altGreet;

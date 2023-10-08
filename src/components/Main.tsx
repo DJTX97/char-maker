@@ -1,6 +1,7 @@
 import MainInputs from "./sections/MainInputs";
 import AltGreetings from "./sections/AltGreetings";
 import LorebookEditor from "./sections/LorebookEditor";
+import Metadata from "./sections/Metadata";
 
 export default function Main() {
   return (
@@ -8,6 +9,7 @@ export default function Main() {
       <MainInputs />
       <AltGreetings />
       <LorebookEditor />
+      <Metadata />
     </main>
   );
 }

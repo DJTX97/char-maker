@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 import { entryStore, loreBookStore } from "../../data/MainStore";
-import { loreBookEntry } from "../../interfaces/V2CharSchema";
+//import { LoreBookEntry } from "../../interfaces/V2CharSchema";
 import LorebookInput from "../generalComps/LorebookInput";
 import SectionButton from "../microComps/SectionButton";
 import CleanupButton from "../microComps/CleanupButton";
@@ -104,7 +104,7 @@ export default function LorebookEditor() {
         changeHandler={handleLoreName}
       />
       <div className="flex flex-col gap-20 mt-20">
-        {Entries.map((item: loreBookEntry, index: number) => {
+        {Entries.map((item, index) => {
           return (
             <div key={KEYS[index]} className="relative">
               <LorebookInput

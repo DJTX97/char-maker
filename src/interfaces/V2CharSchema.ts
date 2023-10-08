@@ -1,4 +1,4 @@
-export interface loreBookEntry {
+export interface LoreBookEntry {
   id: number; // id starts at 1
   keys: string[]; //should be an array
   secondary_keys: string[]; //should be an array
@@ -32,7 +32,7 @@ export interface V2CharSchema {
     first_mes: string;
     alternate_greetings: string[]; //should be an array
     character_book: {
-      entries: loreBookEntry[];
+      entries: LoreBookEntry[];
       name: string;
     };
     creator: string;
