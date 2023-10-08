@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { entryStore, loreBookStore } from "../../data/MainStore";
-import { loreBookEntry } from "../../interfaces/CharCardSchema";
+import { loreBookEntry } from "../../interfaces/V2CharSchema";
 import Input from "../microComps/Input";
 
 interface LorebookInputProps {

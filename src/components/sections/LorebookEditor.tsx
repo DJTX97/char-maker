@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 import { entryStore, loreBookStore } from "../../data/MainStore";
-import { loreBookEntry } from "../../interfaces/CharCardSchema";
+import { loreBookEntry } from "../../interfaces/V2CharSchema";
 import LorebookInput from "../generalComps/LorebookInput";
 import SectionButton from "../microComps/SectionButton";
 import CleanupButton from "../microComps/CleanupButton";

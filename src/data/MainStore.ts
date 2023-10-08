@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { loreBookEntry } from "../interfaces/CharCardSchema";
+import { loreBookEntry } from "../interfaces/V2CharSchema";
 import { MainInputs } from "../configs/MainInputs.json";
 
 export interface mainInputType {
