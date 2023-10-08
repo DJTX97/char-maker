@@ -1,4 +1,5 @@
 import { useAtom } from "jotai";
+import { saveAs } from "file-saver";
 import {
   mainInputStore,
   altGreetStore,
@@ -52,6 +53,7 @@ export default function Export() {
       spec: "chara_card_v2",
       spec_version: "2.0",
       data: {
+        ...character.data, //fix for weird typescript error
         ...bio,
         ...meta,
         avatar: "none",
@@ -62,11 +64,16 @@ export default function Export() {
     });
   }, [bio, altGreetings, lorebook, metadata]);
 
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
+  // useEffect(() => {
+  //   console.log(character);
+  // }, [character]);
 
-  const handleExport = () => {};
+  const handleExport = () => {
+    console.log(character);
+    const jsonCharacter = JSON.stringify(character);
+    const blob = new Blob([jsonCharacter], { type: "application/json" });
+    saveAs(blob, `${character.data.name}.V2.json`);
+  };
 
   return (
     <section>
