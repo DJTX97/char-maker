@@ -17,7 +17,7 @@ export interface AltGreetType {
 export interface MetadataInputType {
     id: string;
     name: string;
-    value: string;
+    value: string | string[];
 }
 
 const mainInputs: MainInputType[] = MainInputs
@@ -38,7 +38,7 @@ export const loreBookStore = atom(lorebook);
 const metadata: MetadataInputType[] = Metadata;
 export const metadataStore = atom(metadata);
 
-const char: V2CharSchema = {
+const CHAR_V2: V2CharSchema = {
   spec: "chara_card_v2",
   spec_version: "2.0",
   data: {

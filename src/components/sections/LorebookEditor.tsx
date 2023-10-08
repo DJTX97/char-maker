@@ -87,10 +87,9 @@ export default function LorebookEditor() {
     
   }, [Entries, worldName]);
 
-  useEffect(() => {
-    console.log(lorebook);
-    //console.log(worldName);
-  }, [lorebook]);
+  // useEffect(() => {
+  //   console.log(lorebook);
+  // }, [lorebook]);
   return (
     <section>
       <div className="flex justify-between mb-10 text-4xl font-semibold">

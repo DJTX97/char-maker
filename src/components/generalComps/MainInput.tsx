@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { mainInputStore } from "../../data/MainStore";
 import Input from "../MicroComps/Input";
@@ -19,14 +19,16 @@ export default function MainInput({ id, name }: MainInputProps) {
     const newValue = event.target.value;
     setTextareaValue(newValue);
 
-    if (mainInputs.map((input) => input.id).includes(id)) {
-      setMainInputs((prevMainInputs) =>
-        prevMainInputs.map((input) =>
-          input.id === id ? { ...input, value: newValue } : input
-        )
-      );
-    }
+    setMainInputs((prevMainInputs) =>
+      prevMainInputs.map((input) =>
+        input.id === id ? { ...input, value: newValue } : input
+      )
+    );
   };
+
+  // useEffect(() => {
+  //   console.log(mainInputs);
+  // }, [textareaValue]);
 
   return (
     <Input

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { metadataStore } from "../../data/MainStore";
 import Input from "../MicroComps/Input";
@@ -19,14 +19,25 @@ export default function MetadataInput({ id, name }: MetadataInputProps) {
     const newValue = event.target.value;
     setTextareaValue(newValue);
 
-    if (metaInputs.map((input) => input.id).includes(id)) {
-      setMetaInputs((prevMetaInputs) =>
-        prevMetaInputs.map((input) =>
-          input.id === id ? { ...input, value: newValue } : input
-        )
-      );
-    }
+    setMetaInputs((prevMetaInputs) =>
+      prevMetaInputs.map((input) => {
+        if (input.id === "tags") {
+          return {
+            ...input,
+            value: newValue.split(",").map((tag) => tag.trim()),
+          };
+        } else if (input.id === id && input.id !== "tags") {
+          return { ...input, value: newValue };
+        } else {
+          return input;
+        }
+      })
+    );
   };
+
+  // useEffect(() => {
+  //   console.log(metaInputs);
+  // }, [textareaValue]);
 
   return (
     <Input
