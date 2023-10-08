@@ -1,7 +1,7 @@
 //import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { mainInputStore } from "../../data/MainStore";
-import MainInput from "../generalComps/MainInput";
+import MainInput from "../GeneralComps/MainInput";
 
 export default function MainInputs() {
   const [mainInputs] = useAtom(mainInputStore);

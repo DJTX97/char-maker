@@ -3,10 +3,10 @@ import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 import { entryStore, loreBookStore } from "../../data/MainStore";
 //import { LoreBookEntry } from "../../interfaces/V2CharSchema";
-import LorebookInput from "../generalComps/LorebookInput";
-import SectionButton from "../microComps/SectionButton";
-import CleanupButton from "../microComps/CleanupButton";
-import Input from "../microComps/Input";
+import LorebookInput from "../GeneralComps/LorebookInput";
+import SectionButton from "../MicroComps/SectionButton";
+import CleanupButton from "../MicroComps/CleanupButton";
+import Input from "../MicroComps/Input";
 
 export default function LorebookEditor() {
   const [lorebook, setLorebook] = useAtom(loreBookStore);

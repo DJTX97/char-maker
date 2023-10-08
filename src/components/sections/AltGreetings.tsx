@@ -1,9 +1,9 @@
 import { useAtom } from "jotai/react";
 import { altGreetStore, AltGreetType } from "../../data/MainStore";
 import { useEffect } from "react";
-import SectionButton from "../microComps/SectionButton";
-import AltGreetInput from "../generalComps/AltGreetInput";
-import CleanupButton from "../microComps/CleanupButton";
+import SectionButton from "../MicroComps/SectionButton";
+import AltGreetInput from "../GeneralComps/AltGreetInput";
+import CleanupButton from "../MicroComps/CleanupButton";
 
 export default function AltGreetings() {
   const [altGreets, setAltGreets] = useAtom(altGreetStore);

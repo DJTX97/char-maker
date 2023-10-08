@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { entryStore, loreBookStore } from "../../data/MainStore";
-import { loreBookEntry } from "../../interfaces/V2CharSchema";
-import Input from "../microComps/Input";
+import { LoreBookEntry } from "../../interfaces/V2CharSchema";
+import Input from "../MicroComps/Input";
 
 interface LorebookInputProps {
   id: {
@@ -14,7 +14,7 @@ interface LorebookInputProps {
   };
   index?: number;
   name?: string;
-  inputable: loreBookEntry;
+  inputable: LoreBookEntry;
 }
 
 export default function LorebookInput({
