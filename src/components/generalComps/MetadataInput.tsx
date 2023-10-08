@@ -20,18 +20,23 @@ export default function MetadataInput({ id, name }: MetadataInputProps) {
     setTextareaValue(newValue);
 
     setMetaInputs((prevMetaInputs) =>
-      prevMetaInputs.map((input) => {
-        if (input.id === "tags") {
-          return {
-            ...input,
-            value: newValue.split(",").map((tag) => tag.trim()),
-          };
-        } else if (input.id === id && input.id !== "tags") {
-          return { ...input, value: newValue };
-        } else {
-          return input;
+      prevMetaInputs.map(
+        (input) => {
+          if (input.id === id && id !== "tags") {
+            return {
+              ...input,
+              value: newValue,
+            };
+          } else if (input.id === id && id === "tags") {
+            return {
+              ...input,
+              value: newValue.split(",").map((tag) => tag.trim()),
+            };
+          } else {
+            return input;
+          }
         }
-      })
+      )
     );
   };
 

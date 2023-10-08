@@ -84,7 +84,6 @@ export default function LorebookEditor() {
       entries: Entries,
       name: worldName,
     });
-    
   }, [Entries, worldName]);
 
   // useEffect(() => {
@@ -125,11 +124,13 @@ export default function LorebookEditor() {
           );
         })}
       </div>
-      <SectionButton
-        destinations={Entries}
-        handler={addEntry}
-        name="Add Entry"
-      />
+      <div className="flex justify-end">
+        <SectionButton
+          destinations={Entries}
+          handler={addEntry}
+          name="Add Entry"
+        />
+      </div>
     </section>
   );
 }

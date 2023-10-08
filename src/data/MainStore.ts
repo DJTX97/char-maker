@@ -20,6 +20,11 @@ export interface MetadataInputType {
     value: string | string[];
 }
 
+export interface lorebookType {
+  entries: LoreBookEntry[];
+  name: string;
+}
+
 const mainInputs: MainInputType[] = MainInputs
 export const mainInputStore = atom(mainInputs);
 
@@ -29,7 +34,7 @@ export const altGreetStore = atom(altGreets);
 const entries: LoreBookEntry[] = [];
 export const entryStore = atom(entries);
 
-const lorebook = {
+const lorebook: lorebookType = {
   entries,
   name: "",
 }
@@ -38,28 +43,4 @@ export const loreBookStore = atom(lorebook);
 const metadata: MetadataInputType[] = Metadata;
 export const metadataStore = atom(metadata);
 
-const CHAR_V2: V2CharSchema = {
-  spec: "chara_card_v2",
-  spec_version: "2.0",
-  data: {
-    avatar: "none",
-    name: "",
-    description: "",
-    personality: "",
-    mes_example: "",
-    scenario: "",
-    first_mes: "",
-    alternate_greetings: [],
-    character_book: {
-      entries: [],
-      name: "",
-    },
-    creator: "",
-    character_version: "",
-    tags: [],
-    creator_notes: "",
-    system_prompt: "",
-    post_history_instructions: "",
-    extensions: {},
-  }
-}
+export const charStore = atom({})

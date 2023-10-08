@@ -2,6 +2,7 @@ import MainInputs from "../Sections/MainInputs";
 import AltGreetings from "../Sections/AltGreetings";
 import LorebookEditor from "../Sections/LorebookEditor";
 import Metadata from "../Sections/Metadata";
+import Export from "../Sections/Export";
 
 export default function Main() {
   return (
@@ -10,6 +11,7 @@ export default function Main() {
       <AltGreetings />
       <LorebookEditor />
       <Metadata />
+      <Export />
     </main>
   );
 }

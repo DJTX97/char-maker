@@ -35,11 +35,11 @@ export default function AltGreetings() {
 
   const emptyStore = () => {
     setAltGreets([]);
-  }
+  };
 
-  useEffect(() => {
-    console.log(altGreets);
-  }, [altGreets]);
+  // useEffect(() => {
+  //   console.log(altGreets);
+  // }, [altGreets]);
 
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
@@ -51,10 +51,7 @@ export default function AltGreetings() {
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet) => (
           <div className="flex gap-10" key={altGreet.id}>
-            <AltGreetInput
-              id={altGreet.id}
-              name={altGreet.name}
-            />
+            <AltGreetInput id={altGreet.id} name={altGreet.name} />
             <div className="flex items-center">
               <button
                 onClick={() => handleRemoveGreet(altGreet.id)}
@@ -66,7 +63,13 @@ export default function AltGreetings() {
           </div>
         ))}
       </div>
-      <SectionButton destinations={altGreets} handler={handleAddGreet} name="Add Greeting" />
+      <div className="flex justify-end">
+        <SectionButton
+          destinations={altGreets}
+          handler={handleAddGreet}
+          name="Add Greeting"
+        />
+      </div>
     </section>
   );
 }
