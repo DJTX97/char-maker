@@ -70,9 +70,9 @@ const Import = () => {
     // console.log(file);
   }, [file]);
 
-  useEffect(() => {
-    console.log(altGreets);
-  }, [altGreets]);
+  // useEffect(() => {
+  //   console.log(altGreets);
+  // }, [altGreets]);
 
   return (
     <div {...getRootProps()} className="h-20 text-center">

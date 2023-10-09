@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { altGreetStore } from "../../data/PreparationStore";
 import Input from "../MicroComps/Input";
@@ -14,19 +14,18 @@ export default function AltGreetInput({ id, name }: AltGreetProps) {
   const [textareaValue, setTextareaValue] = useState("");
 
   const handleValueChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    //Persist event.target to access it asynchronously and keep state in sync with the actual data
-    event.persist();
-    const newValue = event.target.value;
-    setTextareaValue(newValue);
+    setTextareaValue(event.target.value);
+  };
 
+  useEffect(() => {
     if (altGreets.map((altGreet) => altGreet.id).includes(id)) {
       setAltGreets((prevAltGreets) =>
         prevAltGreets.map((altGreet) =>
-          altGreet.id === id ? { ...altGreet, value: newValue } : altGreet
+          altGreet.id === id ? { ...altGreet, value: textareaValue } : altGreet
         )
       );
     }
-  };
+  }, [textareaValue]);
 
   return (
     <Input

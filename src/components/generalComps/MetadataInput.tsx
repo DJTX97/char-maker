@@ -42,9 +42,9 @@ export default function MetadataInput({ id, name }: MetadataInputProps) {
 
 
 
-  // useEffect(() => {
-  //   console.log(metaInputs);
-  // }, [textareaValue]);
+  useEffect(() => {
+    console.log(metaInputs);
+  }, [textareaValue]);
 
   return (
     <Input
