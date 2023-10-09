@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
-import { altGreetStore } from "../../data/MainStore";
+import { altGreetStore } from "../../data/PreparationStore";
 import Input from "../MicroComps/Input";
 
 interface AltGreetProps {

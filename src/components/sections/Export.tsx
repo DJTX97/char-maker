@@ -5,11 +5,16 @@ import {
   altGreetStore,
   loreBookStore,
   metadataStore,
+} from "../../data/PreparationStore";
+import {
   charStore,
-} from "../../data/MainStore";
+  vitalStore,
+  greetingStore,
+  //loreStore,
+  metaStore,
+} from "../../data/OutputStore";
 import SectionButton from "../MicroComps/SectionButton";
 import { useEffect, useState } from "react";
-import { V2CharSchema } from "../../interfaces/V2CharSchema";
 
 export default function Export() {
   const [mainInputs] = useAtom(mainInputStore);
@@ -17,9 +22,14 @@ export default function Export() {
   const [lorebook] = useAtom(loreBookStore);
   const [metadata] = useAtom(metadataStore);
 
-  const [bio, setBio] = useState<object>({});
-  const [altGreetings, setAltGreetings] = useState<string[]>([]);
-  const [meta, setMeta] = useState<object>({});
+  // const [bio, setBio] = useAtom(vitalStore);
+  // const [altGreetings, setAltGreetings] = useAtom(greetingStore);
+  // const [meta, setMeta] = useAtom(metaStore);
+  // const [character, setCharacter] = useAtom(charStore);
+
+  const [bio, setBio] = useState({});
+  const [altGreetings, setAltGreetings] = useState<string[] | null>([]);
+  const [meta, setMeta] = useState({});
   const [character, setCharacter] = useAtom(charStore);
 
   // Prepare main inputs
@@ -34,8 +44,21 @@ export default function Export() {
 
   //Prepare alternative greetings
   useEffect(() => {
-    setAltGreetings(altGreets.map((altGreet) => altGreet.value));
+    if (altGreets.length > 0) {
+      setAltGreetings(altGreets.map((altGreet) => altGreet.value));
+    } else {
+      setAltGreetings(null);
+    }
   }, [altGreets]);
+
+  // Prepare lore
+  // useEffect(() => {
+  //   if (lorebook && lorebook.entries.length > 0) {
+  //     setLore(lorebook);
+  //   } else {
+  //     setLore(null);
+  //   }
+  // }, [Object.values(lorebook)]);
 
   // Prepare metadata
   useEffect(() => {
@@ -64,9 +87,10 @@ export default function Export() {
     });
   }, [bio, altGreetings, lorebook, metadata]);
 
-  // useEffect(() => {
-  //   console.log(character);
-  // }, [character]);
+  useEffect(() => {
+    console.log(character);
+  }, [character]);
+  
 
   const handleExport = () => {
     console.log(character);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { mainInputStore } from "../../data/MainStore";
+import { mainInputStore } from "../../data/PreparationStore";
 import Input from "../MicroComps/Input";
 
 interface MainInputProps {

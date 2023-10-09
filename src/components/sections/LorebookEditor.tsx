@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
-import { entryStore, loreBookStore } from "../../data/MainStore";
-//import { LoreBookEntry } from "../../interfaces/V2CharSchema";
+import { entryStore, loreBookStore, worldNameStore } from "../../data/PreparationStore";
 import LorebookInput from "../GeneralComps/LorebookInput";
 import SectionButton from "../MicroComps/SectionButton";
 import CleanupButton from "../MicroComps/CleanupButton";
@@ -12,7 +11,7 @@ export default function LorebookEditor() {
   const [lorebook, setLorebook] = useAtom(loreBookStore);
   const [Entries, setEntries] = useAtom(entryStore);
 
-  const [worldName, setWorldName] = useState("");
+  const [worldName, setWorldName] = useAtom(worldNameStore);
 
   const [KEYS, setKEYS] = useState<string[]>([]);
 
@@ -80,10 +79,14 @@ export default function LorebookEditor() {
   };
 
   useEffect(() => {
-    setLorebook({
-      entries: Entries,
-      name: worldName,
-    });
+    if (Entries.length > 0) {
+      setLorebook({
+        entries: Entries,
+        name: worldName,
+      });
+    } else {
+      setLorebook(null);
+    }
   }, [Entries, worldName]);
 
   // useEffect(() => {

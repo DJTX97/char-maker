@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { metadataStore } from "../../data/MainStore";
+import { metadataStore } from "../../data/PreparationStore";
 import Input from "../MicroComps/Input";
 
 interface MetadataInputProps {
@@ -39,6 +39,8 @@ export default function MetadataInput({ id, name }: MetadataInputProps) {
       )
     );
   };
+
+
 
   // useEffect(() => {
   //   console.log(metaInputs);

@@ -1,9 +1,12 @@
 import { useAtom } from "jotai/react";
-import { altGreetStore, AltGreetType } from "../../data/MainStore";
+import { altGreetStore, AltGreetType } from "../../data/PreparationStore";
 import { useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import SectionButton from "../MicroComps/SectionButton";
 import AltGreetInput from "../GeneralComps/AltGreetInput";
 import CleanupButton from "../MicroComps/CleanupButton";
+import { ID_Prefixes } from "../../configs/StaticInputConfigs.json";
+
 
 export default function AltGreetings() {
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
@@ -13,7 +16,7 @@ export default function AltGreetings() {
     setAltGreets((prevAltGreets: AltGreetType[]) => [
       ...prevAltGreets,
       {
-        id: Date.now().toString(),
+        id: `altgreet-${uuidv4()}`,
         name: `Alternative Greeting ${greetIndex}`,
         value: "",
       },

@@ -1,6 +1,6 @@
 //import { useEffect } from "react";
 import { useAtom } from "jotai";
-import { metadataStore } from "../../data/MainStore";
+import { metadataStore } from "../../data/PreparationStore";
 import MetadataInput from "../GeneralComps/MetadataInput";
 
 export default function Metadata() {
