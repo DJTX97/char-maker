@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useAtom } from "jotai";
-import { altGreetStore, entryStore, worldNameStore } from "../../data/PreparationStore";
+import {
+  altGreetStore,
+  entryStore,
+  worldNameStore,
+} from "../../data/PreparationStore";
 import { v4 as uuidv4 } from "uuid";
 import { V2CharSchema } from "../../interfaces/V2CharSchema";
 
@@ -49,16 +53,15 @@ const Import = () => {
   useEffect(() => {
     if (file) {
       if (file.data.alternate_greetings) {
-        const importedGreetings = file.data.alternate_greetings.map(
-          (greet: string, index: number) => {
+        setAltGreets(
+          file.data.alternate_greetings.map((greet: string, index: number) => {
             return {
               id: `altgreet-${uuidv4()}`,
               name: `Alternative Greeting ${index + 1}`,
               value: greet,
             };
-          }
+          })
         );
-        setAltGreets(importedGreetings);
       }
       // if (file.data.character_book) {
       //   const importedLoreEntries = file.data.character_book.entries

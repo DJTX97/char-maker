@@ -6,12 +6,13 @@ import Input from "../MicroComps/Input";
 interface AltGreetProps {
   id: string;
   name?: string;
+  value: string;
 }
 
-export default function AltGreetInput({ id, name }: AltGreetProps) {
+export default function AltGreetInput({ id, name, value }: AltGreetProps) {
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
 
-  const [textareaValue, setTextareaValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState(value);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(event.target.value);
