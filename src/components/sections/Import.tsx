@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import {
   altGreetStore,
   entryStore,
-  mainInputStore,
+  primaryInputStore,
   worldNameStore,
 } from "../../data/PreparationStore";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +17,7 @@ const Import = () => {
   const [file, setFile] = useState<any>(null);
   const [entries, setEntries] = useAtom(entryStore);
   const [worldName, setWorldName] = useAtom(worldNameStore);
-  const [mainInputs, setMainInputs] = useAtom(mainInputStore);
+  const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
 
   const handleFile = async (file: any) => {

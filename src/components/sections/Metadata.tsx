@@ -1,14 +1,10 @@
 //import { useEffect } from "react";
 import { useAtom } from "jotai";
-import { metadataStore } from "../../data/PreparationStore";
-import MetadataInput from "../GeneralComps/MetadataInput";
+import { primaryInputStore } from "../../data/PreparationStore";
+import PrimaryInput from "../GeneralComps/PrimaryInput";
 
 export default function Metadata() {
-  const [metaInputs] = useAtom(metadataStore);
-
-  // useEffect(() => {
-  //   console.log(mainInputs);
-  // }, [mainInputs]);
+  const [primaryInputs] = useAtom(primaryInputStore);
 
   return (
     <section>
@@ -17,9 +13,11 @@ export default function Metadata() {
         {/* <CleanupButton cleanupMethod={emptyStore} /> */}
       </div>
       <div className="flex flex-col gap-5">
-        {metaInputs.map((input, index) => (
-          <MetadataInput key={index} id={input.id} name={input.name} />
-        ))}
+        {primaryInputs
+          .slice(primaryInputs.length / 2, primaryInputs.length)
+          .map((input, index) => (
+            <PrimaryInput key={index} id={input.id} name={input.name} />
+          ))}
       </div>
     </section>
   );

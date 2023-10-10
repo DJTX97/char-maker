@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { metadataStore } from "../../data/PreparationStore";
+import { primaryInputStore } from "../../data/PreparationStore";
 import Input from "../MicroComps/Input";
 
 interface MetadataInputProps {
@@ -8,8 +8,8 @@ interface MetadataInputProps {
   name?: string;
 }
 
-export default function MetadataInput({ id, name }: MetadataInputProps) {
-  const [metaInputs, setMetaInputs] = useAtom(metadataStore);
+export default function PrimaryInput({ id, name }: MetadataInputProps) {
+  const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
 
   const [textareaValue, setTextareaValue] = useState("");
 
@@ -19,8 +19,8 @@ export default function MetadataInput({ id, name }: MetadataInputProps) {
     const newValue = event.target.value;
     setTextareaValue(newValue);
 
-    setMetaInputs((prevMetaInputs) =>
-      prevMetaInputs.map(
+    setPrimaryInputs((prev) =>
+      prev.map(
         (input) => {
           if (input.id === id && id !== "tags") {
             return {

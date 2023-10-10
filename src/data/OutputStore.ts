@@ -1,6 +1,5 @@
 import { atom } from "jotai";
-import { V2CharSchema, LoreBookEntry } from "../interfaces/V2CharSchema";
-import { lorebookType } from "./PreparationStore";
+import { V2CharSchema} from "../interfaces/V2CharSchema";
 
 // Some data may not be properly initialized on first render which causes the schema to throw a typescript error (workaround: set type to 'object')
 const character: V2CharSchema = {
@@ -31,8 +30,6 @@ const character: V2CharSchema = {
 
 export const charStore = atom(character);
 
-export const vitalStore = atom({});
-export const greetingStore = atom<string[] | null>(null);
-//export const loreStore = atom<lorebookType | null>(null);
-export const metaStore = atom({});
+
+
 

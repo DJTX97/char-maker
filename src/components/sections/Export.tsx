@@ -1,46 +1,34 @@
 import { useAtom } from "jotai";
 import { saveAs } from "file-saver";
 import {
-  mainInputStore,
   altGreetStore,
   loreBookStore,
-  metadataStore,
+  primaryInputStore,
 } from "../../data/PreparationStore";
-import {
-  charStore,
-  vitalStore,
-  greetingStore,
-  //loreStore,
-  metaStore,
-} from "../../data/OutputStore";
+import { charStore } from "../../data/OutputStore";
 import SectionButton from "../MicroComps/SectionButton";
 import { useEffect, useState } from "react";
 
 export default function Export() {
-  const [mainInputs] = useAtom(mainInputStore);
+  const [primaryInputs] = useAtom(primaryInputStore);
   const [altGreets] = useAtom(altGreetStore);
   const [lorebook] = useAtom(loreBookStore);
-  const [metadata] = useAtom(metadataStore);
 
-  // const [bio, setBio] = useAtom(vitalStore);
-  // const [altGreetings, setAltGreetings] = useAtom(greetingStore);
-  // const [meta, setMeta] = useAtom(metaStore);
-  // const [character, setCharacter] = useAtom(charStore);
+  const [primaries, setPrimaries] = useState({});
 
-  const [bio, setBio] = useState({});
   const [altGreetings, setAltGreetings] = useState<string[] | null>([]);
-  const [meta, setMeta] = useState({});
+
   const [character, setCharacter] = useAtom(charStore);
 
-  // Prepare main inputs
+  //Prepare Primary Inputs
   useEffect(() => {
-    setBio(
-      mainInputs.reduce((acc: any, input) => {
+    setPrimaries(
+      primaryInputs.reduce((acc: any, input) => {
         acc[input.id] = input.value;
         return acc;
       }, {})
     );
-  }, [mainInputs]);
+  }, [primaryInputs]);
 
   //Prepare alternative greetings
   useEffect(() => {
@@ -51,25 +39,6 @@ export default function Export() {
     }
   }, [altGreets]);
 
-  // Prepare lore
-  // useEffect(() => {
-  //   if (lorebook && lorebook.entries.length > 0) {
-  //     setLore(lorebook);
-  //   } else {
-  //     setLore(null);
-  //   }
-  // }, [Object.values(lorebook)]);
-
-  // Prepare metadata
-  useEffect(() => {
-    setMeta(
-      metadata.reduce((acc: any, input) => {
-        acc[input.id] = input.value;
-        return acc;
-      }, {})
-    );
-  }, [metadata]);
-
   // Prepare char
   useEffect(() => {
     setCharacter({
@@ -77,20 +46,18 @@ export default function Export() {
       spec_version: "2.0",
       data: {
         ...character.data, //fix for weird typescript error
-        ...bio,
-        ...meta,
+        ...primaries,
         avatar: "none",
         alternate_greetings: altGreetings,
         character_book: lorebook,
         extensions: {},
       },
     });
-  }, [bio, altGreetings, lorebook, meta]);
+  }, [primaries, altGreetings, lorebook]);
 
-  // useEffect(() => {
-  //   console.log(character);
-  // }, [character]);
-  
+  useEffect(() => {
+    console.log(character);
+  }, [character]);
 
   const handleExport = () => {
     console.log(character);

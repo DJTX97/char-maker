@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import SectionButton from "../MicroComps/SectionButton";
 import AltGreetInput from "../GeneralComps/AltGreetInput";
 import CleanupButton from "../MicroComps/CleanupButton";
-import { ID_Prefixes } from "../../configs/StaticInputConfigs.json";
 
 
 export default function AltGreetings() {

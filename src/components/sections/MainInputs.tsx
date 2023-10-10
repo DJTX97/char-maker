@@ -1,25 +1,19 @@
 //import { useEffect } from "react";
 import { useAtom } from "jotai";
-import { mainInputStore } from "../../data/PreparationStore";
-import MainInput from "../GeneralComps/MainInput";
+import { primaryInputStore } from "../../data/PreparationStore";
+import PrimaryInput from "../GeneralComps/PrimaryInput";
 
 export default function MainInputs() {
-  const [mainInputs] = useAtom(mainInputStore);
-
-  // useEffect(() => {
-  //   console.log(mainInputs);
-  // }, [mainInputs]);
+  const [primaryInputs] = useAtom(primaryInputStore);
 
   return (
     <section>
-      <div className="flex justify-between mb-10 text-4xl font-semibold">
-        <div>Bio</div>
-        {/* <CleanupButton cleanupMethod={emptyStore} /> */}
-      </div>
       <div className="flex flex-col gap-5">
-        {mainInputs.map((input, index) => (
-          <MainInput key={index} id={input.id} name={input.name} />
-        ))}
+        {primaryInputs
+          .slice(0, primaryInputs.length / 2)
+          .map((input, index) => (
+            <PrimaryInput key={index} id={input.id} name={input.name} />
+          ))}
       </div>
     </section>
   );

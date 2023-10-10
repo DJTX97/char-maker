@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 
-
 interface InputProps {
   id: string;
   name?: string;
@@ -11,9 +10,17 @@ interface InputProps {
   width?: string; //width value based on tailwind syntax
 }
 
-export default function Input({ id, name, nameSize, placeholder, val, changeHandler, width }: InputProps) {
+export default function Input({
+  id,
+  name,
+  nameSize,
+  placeholder,
+  val,
+  changeHandler,
+  width,
+}: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  
+
   // Autosize textarea to fit content
   useEffect(() => {
     if (textareaRef.current) {
@@ -24,7 +31,11 @@ export default function Input({ id, name, nameSize, placeholder, val, changeHand
 
   return (
     <div className="w-full flex flex-col gap-3">
-      {name && <div className={`${nameSize ? nameSize : "text-2xl"} font-semibold`}>{name}</div>}
+      {name && (
+        <div className={`${nameSize ? nameSize : "text-2xl"} font-semibold`}>
+          {name}
+        </div>
+      )}
       <textarea
         id={id}
         ref={textareaRef}
@@ -32,9 +43,10 @@ export default function Input({ id, name, nameSize, placeholder, val, changeHand
         placeholder={placeholder ?? ""}
         value={val}
         onChange={changeHandler}
-        className={`${width && width} p-2 rounded-lg resize-none overflow-hidden`}
+        className={`${
+          width && width
+        } p-2 rounded-lg resize-none overflow-hidden`}
       />
     </div>
   );
 }
-

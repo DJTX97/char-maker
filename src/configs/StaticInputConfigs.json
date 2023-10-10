@@ -1,13 +1,11 @@
 {
-  "MainInputs": [
+  "PrimaryInputs": [
     { "id": "name", "name": "Name", "value": "" },
     { "id": "description", "name": "Description", "value": "" },
     { "id": "personality", "name": "Personality", "value": "" },
     { "id": "mes_example", "name": "Example Messages", "value": "" },
     { "id": "scenario", "name": "Scenario", "value": "" },
-    { "id": "first_mes", "name": "Greeting", "value": "" }
-  ],
-  "Metadata": [
+    { "id": "first_mes", "name": "Greeting", "value": "" },
     { "id": "creator", "name": "Creator", "value": "" },
     { "id": "character_version", "name": "Version", "value": "" },
     { "id": "tags", "name": "Tags", "value": "" },
