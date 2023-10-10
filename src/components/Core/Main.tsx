@@ -1,18 +1,19 @@
-import MainInputs from "../Sections/MainInputs";
 import AltGreetings from "../Sections/AltGreetings";
 import LorebookEditor from "../Sections/LorebookEditor";
-import Metadata from "../Sections/Metadata";
+
 import Export from "../Sections/Export";
 import Import from "../Sections/Import";
+import PrimarySection from "../Sections/PrimarySection";
 
 export default function Main() {
   return (
     <main className="flex flex-col gap-32 px-40">
       <Import />
-      <MainInputs />
+      <PrimarySection />
       <AltGreetings />
       <LorebookEditor />
-      <Metadata />
+      <PrimarySection title="Metadata" />
+
       <Export />
     </main>
   );
