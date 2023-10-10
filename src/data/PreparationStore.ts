@@ -5,7 +5,7 @@ import { PrimaryInputs } from "../configs/StaticInputConfigs.json";
 export interface PrimaryInputType {
   id: string;
   name: string;
-  value: string | string[];
+  value: string
 }
 
 export interface AltGreetType {
@@ -33,3 +33,6 @@ export const worldNameStore = atom(worldName);
 
 const lorebook = null;
 export const loreBookStore = atom<lorebookType | null>(lorebook);
+
+const file:any = null;
+export const fileStore = atom(file);

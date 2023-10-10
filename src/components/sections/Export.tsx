@@ -24,7 +24,15 @@ export default function Export() {
   useEffect(() => {
     setPrimaries(
       primaryInputs.reduce((acc: any, input) => {
-        acc[input.id] = input.value;
+        if (input.id === "tags") {
+          if (typeof input.value === "string") {
+            acc[input.id] = input.value.split(",").map((tag) => tag.trim());
+          } else {
+            acc[input.id] = [];
+          }
+        } else {
+          acc[input.id] = input.value;
+        }
         return acc;
       }, {})
     );

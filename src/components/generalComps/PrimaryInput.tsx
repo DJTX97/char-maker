@@ -6,12 +6,13 @@ import Input from "../MicroComps/Input";
 interface MetadataInputProps {
   id: string;
   name?: string;
+  value: string;
 }
 
-export default function PrimaryInput({ id, name }: MetadataInputProps) {
+export default function PrimaryInput({ id, name, value }: MetadataInputProps) {
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
 
-  const [textareaValue, setTextareaValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState(value);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     //Persist event.target to access it asynchronously and keep state in sync with the actual data
@@ -20,27 +21,18 @@ export default function PrimaryInput({ id, name }: MetadataInputProps) {
     setTextareaValue(newValue);
 
     setPrimaryInputs((prev) =>
-      prev.map(
-        (input) => {
-          if (input.id === id && id !== "tags") {
-            return {
-              ...input,
-              value: newValue,
-            };
-          } else if (input.id === id && id === "tags") {
-            return {
-              ...input,
-              value: newValue.split(",").map((tag) => tag.trim()),
-            };
-          } else {
-            return input;
-          }
+      prev.map((input) => {
+        if (input.id === id) {
+          return {
+            ...input,
+            value: newValue,
+          };
+        } else {
+          return input;
         }
-      )
+      })
     );
   };
-
-
 
   // useEffect(() => {
   //   console.log(metaInputs);

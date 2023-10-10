@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import {
   altGreetStore,
   entryStore,
+  fileStore,
   primaryInputStore,
   worldNameStore,
 } from "../../data/PreparationStore";
@@ -14,7 +15,7 @@ import { V2CharSchema } from "../../interfaces/V2CharSchema";
 const acceptedFileTypes = ["application/json", "image/png"];
 
 const Import = () => {
-  const [file, setFile] = useState<any>(null);
+  const [file, setFile] = useAtom(fileStore)
   const [entries, setEntries] = useAtom(entryStore);
   const [worldName, setWorldName] = useAtom(worldNameStore);
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
@@ -55,20 +56,6 @@ const Import = () => {
 
   useEffect(() => {
     if (file) {
-      const dataKeys = Object.keys(file.data);
-      const matchingPrefixes = ID_Prefixes.filter((prefix) =>
-        dataKeys.includes(prefix)
-      );
-      if (matchingPrefixes) {
-        // Do something
-        // Your logic here for when a match is found
-        matchingPrefixes.forEach((prefix) => {
-          const element = document.getElementById(prefix);
-          if (element !== null) {
-            (element as HTMLTextAreaElement).value = file.data[prefix];
-          }
-        });
-      }
       if (file.data.alternate_greetings) {
         setAltGreets(
           file.data.alternate_greetings.map((greet: string, index: number) => {
