@@ -14,17 +14,16 @@ export default function MainInput({ id, name }: MainInputProps) {
   const [textareaValue, setTextareaValue] = useState("");
 
   const handleValueChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    //Persist event.target to access it asynchronously and keep state in sync with the actual data
-    event.persist();
-    const newValue = event.target.value;
-    setTextareaValue(newValue);
+    setTextareaValue(event.target.value);
+  };
 
+  useEffect(() => {
     setMainInputs((prevMainInputs) =>
       prevMainInputs.map((input) =>
-        input.id === id ? { ...input, value: newValue } : input
+        input.id === id ? { ...input, value: textareaValue } : input
       )
     );
-  };
+  }, [textareaValue]);
 
   // useEffect(() => {
   //   console.log(mainInputs);
