@@ -27,7 +27,6 @@
     "tags",
     "creator_notes",
     "system_prompt",
-    "post_history_instructions",
-    "altgreet"
+    "post_history_instructions"
   ]
 }

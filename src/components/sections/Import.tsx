@@ -7,6 +7,7 @@ import {
   worldNameStore,
 } from "../../data/PreparationStore";
 import { v4 as uuidv4 } from "uuid";
+import { ID_Prefixes } from "../../configs/StaticInputConfigs.json";
 import { V2CharSchema } from "../../interfaces/V2CharSchema";
 
 const acceptedFileTypes = ["application/json", "image/png"];
@@ -52,6 +53,20 @@ const Import = () => {
 
   useEffect(() => {
     if (file) {
+      const dataKeys = Object.keys(file.data);
+      const matchingPrefixes = ID_Prefixes.filter((prefix) =>
+        dataKeys.includes(prefix)
+      );
+      if (matchingPrefixes) {
+        // Do something
+        // Your logic here for when a match is found
+        matchingPrefixes.forEach((prefix) => {
+          const element = document.getElementById(prefix);
+          if (element !== null) {
+            (element as HTMLTextAreaElement).value = file.data[prefix];
+          }
+        });
+      }
       if (file.data.alternate_greetings) {
         setAltGreets(
           file.data.alternate_greetings.map((greet: string, index: number) => {
@@ -63,14 +78,13 @@ const Import = () => {
           })
         );
       }
-      // if (file.data.character_book) {
-      //   const importedLoreEntries = file.data.character_book.entries
-      //   const importedLoreName = file.data.character_book.name;
-      //   setEntries(importedLoreEntries);
-      //   setWorldName(importedLoreName);
-      // }
+      if (file.data.character_book) {
+        const importedLoreName = file.data.character_book.name;
+        setWorldName(importedLoreName);
+        // const importedLoreEntries = file.data.character_book.entries;
+        // setEntries(importedLoreEntries);
+      }
     }
-    // console.log(file);
   }, [file]);
 
   // useEffect(() => {

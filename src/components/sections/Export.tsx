@@ -87,9 +87,9 @@ export default function Export() {
     });
   }, [bio, altGreetings, lorebook, meta]);
 
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
+  // useEffect(() => {
+  //   console.log(character);
+  // }, [character]);
   
 
   const handleExport = () => {
