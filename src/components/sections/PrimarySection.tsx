@@ -12,12 +12,13 @@ interface PrimarySectionProps {
 export default function PrimarySection({ title }: PrimarySectionProps) {
   const [file, setFile] = useAtom(fileStore);
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
+  const [MAIN_KEYS, set_MAIN_KEYS] = useState<string[]>([]);
   const [KEYS, setKEYS] = useState<string[]>([]);
 
   useEffect(() => {
     setKEYS(
-      primaryInputs.map((_) => {
-        return uuidv4();
+      primaryInputs.map((input) => {
+        return `${input.id}-${uuidv4()}`;
       })
     );
     if (file) {
@@ -31,6 +32,12 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
       );
     }
   }, [file]);
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    console.log(KEYS);
+  }, [KEYS]);
 
   return (
     <section>
@@ -56,7 +63,7 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
               .slice(primaryInputs.length / 2, primaryInputs.length)
               .map((input, index) => (
                 <PrimaryInput
-                  key={KEYS[index]}
+                  key={KEYS[index + primaryInputs.length / 2]}
                   id={input.id}
                   name={input.name}
                   value={input.value}

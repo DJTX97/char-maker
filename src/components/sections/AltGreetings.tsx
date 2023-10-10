@@ -1,14 +1,19 @@
 import { useAtom } from "jotai/react";
-import { altGreetStore, AltGreetType } from "../../data/PreparationStore";
-import { useEffect } from "react";
+import {
+  altGreetStore,
+  AltGreetType,
+  fileStore,
+} from "../../data/PreparationStore";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import SectionButton from "../MicroComps/SectionButton";
 import AltGreetInput from "../GeneralComps/AltGreetInput";
 import CleanupButton from "../MicroComps/CleanupButton";
 
-
 export default function AltGreetings() {
+  const [file, setFile] = useAtom(fileStore);
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
+  const [KEYS, setKEYS] = useState<string[]>([]);
 
   const handleAddGreet = () => {
     const greetIndex = altGreets.length + 1;
@@ -39,6 +44,30 @@ export default function AltGreetings() {
     setAltGreets([]);
   };
 
+  
+
+  useEffect(() => {
+    // setKEYS(
+    //   altGreets.map((_) => {
+    //     return uuidv4();
+    //   })
+    // );
+
+    if (file) {
+      if (file.data.alternate_greetings) {
+        setAltGreets(
+          file.data.alternate_greetings.map((greet: string, index: number) => {
+            return {
+              id: `altgreet-${uuidv4()}`,
+              name: `Alternative Greeting ${index + 1}`,
+              value: greet,
+            };
+          })
+        );
+      }
+    }
+  }, [file]);
+
   // useEffect(() => {
   //   console.log(altGreets);
   // }, [altGreets]);
@@ -51,9 +80,13 @@ export default function AltGreetings() {
         <CleanupButton cleanupMethod={emptyStore} />
       </div>
       <div className="flex flex-col gap-10">
-        {altGreets.map((altGreet) => (
+        {altGreets.map((altGreet, index) => (
           <div className="flex gap-10" key={altGreet.id}>
-            <AltGreetInput id={altGreet.id} name={altGreet.name} value={altGreet.value} />
+            <AltGreetInput
+              id={altGreet.id}
+              name={altGreet.name}
+              value={altGreet.value}
+            />
             <div className="flex items-center">
               <button
                 onClick={() => handleRemoveGreet(altGreet.id)}

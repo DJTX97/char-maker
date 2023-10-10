@@ -1,6 +1,5 @@
 import AltGreetings from "../Sections/AltGreetings";
 import LorebookEditor from "../Sections/LorebookEditor";
-
 import Export from "../Sections/Export";
 import Import from "../Sections/Import";
 import PrimarySection from "../Sections/PrimarySection";
@@ -13,7 +12,6 @@ export default function Main() {
       <AltGreetings />
       <LorebookEditor />
       <PrimarySection title="Metadata" />
-
       <Export />
     </main>
   );
