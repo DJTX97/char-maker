@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
-import { entryStore, loreBookStore, worldNameStore } from "../../data/PreparationStore";
+import { fileStore, loreBookStore } from "../../data/PreparationStore";
 import LorebookInput from "../GeneralComps/LorebookInput";
 import SectionButton from "../MicroComps/SectionButton";
 import CleanupButton from "../MicroComps/CleanupButton";
 import Input from "../MicroComps/Input";
 
 export default function LorebookEditor() {
+  const [file, setFile] = useAtom(fileStore);
   const [lorebook, setLorebook] = useAtom(loreBookStore);
-  const [Entries, setEntries] = useAtom(entryStore);
+  //const [Entries, setEntries] = useAtom(entryStore);
 
-  const [worldName, setWorldName] = useAtom(worldNameStore);
+  //const [worldName, setWorldName] = useAtom(worldNameStore);
 
   const [KEYS, setKEYS] = useState<string[]>([]);
 
@@ -48,11 +49,18 @@ export default function LorebookEditor() {
   const addEntry = () => {
     setCounter((prev) => prev + 1);
     setKEYS([...KEYS, uuidv4()]);
-    setEntries([...Entries, newEntry]);
+    //setEntries([...Entries, newEntry]);
+
+    setLorebook((prev) => {
+      return {
+        ...prev,
+        entries: [...prev.entries, newEntry],
+      };
+    });
   };
 
   const removeEntry = (index: number) => {
-    let newEntries = [...Entries];
+    let newEntries = lorebook.entries
     const newKEYS = [...KEYS];
 
     newEntries.splice(index, 1);
@@ -65,29 +73,38 @@ export default function LorebookEditor() {
     });
 
     setKEYS(newKEYS);
-    setEntries(newEntries);
+    setLorebook({
+      ...lorebook,
+      entries: newEntries,
+    });
 
     setCounter((prev) => prev - 1);
   };
 
   const emptyStore = () => {
-    setEntries([]);
+    setLorebook({
+      ...lorebook,
+      entries: [],
+    })
   };
 
   const handleLoreName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setWorldName(event.target.value);
+    setLorebook({
+      ...lorebook,
+      name: event.target.value,
+    })
   };
 
-  useEffect(() => {
-    if (Entries.length > 0) {
-      setLorebook({
-        entries: Entries,
-        name: worldName,
-      });
-    } else {
-      setLorebook(null);
-    }
-  }, [Entries, worldName]);
+  // useEffect(() => {
+  //   if (Entries.length > 0) {
+  //     setLorebook({
+  //       entries: Entries,
+  //       name: worldName,
+  //     });
+  //   } else {
+  //     setLorebook(null);
+  //   }
+  // }, [Entries, worldName]);
 
   // useEffect(() => {
   //   console.log(lorebook);
@@ -101,11 +118,11 @@ export default function LorebookEditor() {
       <Input
         id="lorebook"
         placeholder="Enter world name..."
-        val={worldName}
+        val={lorebook.name}
         changeHandler={handleLoreName}
       />
       <div className="flex flex-col gap-20 mt-20">
-        {Entries.map((item, index) => {
+        {lorebook?.entries.map((item, index) => {
           return (
             <div key={KEYS[index]} className="relative">
               <LorebookInput
@@ -129,7 +146,7 @@ export default function LorebookEditor() {
       </div>
       <div className="flex justify-end">
         <SectionButton
-          destinations={Entries}
+          destinations={lorebook.entries}
           handler={addEntry}
           name="Add Entry"
         />

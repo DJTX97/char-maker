@@ -63,12 +63,12 @@ export default function Export() {
     });
   }, [primaries, altGreetings, lorebook]);
 
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
+  // useEffect(() => {
+  //   console.log(character);
+  // }, [character]);
 
   const handleExport = () => {
-    console.log(character);
+    //console.log(character);
     const jsonCharacter = JSON.stringify(character);
     const blob = new Blob([jsonCharacter], { type: "application/json" });
     saveAs(blob, `${character.data.name}.V2.json`);

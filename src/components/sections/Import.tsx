@@ -3,10 +3,10 @@ import { useDropzone } from "react-dropzone";
 import { useAtom } from "jotai";
 import {
   altGreetStore,
-  entryStore,
+  //entryStore,
   fileStore,
   primaryInputStore,
-  worldNameStore,
+  //worldNameStore,
 } from "../../data/PreparationStore";
 import { v4 as uuidv4 } from "uuid";
 import { ID_Prefixes } from "../../configs/StaticInputConfigs.json";
@@ -16,8 +16,8 @@ const acceptedFileTypes = ["application/json", "image/png"];
 
 const Import = () => {
   const [file, setFile] = useAtom(fileStore)
-  const [entries, setEntries] = useAtom(entryStore);
-  const [worldName, setWorldName] = useAtom(worldNameStore);
+  // const [entries, setEntries] = useAtom(entryStore);
+  // const [worldName, setWorldName] = useAtom(worldNameStore);
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
 

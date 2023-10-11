@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { entryStore, loreBookStore } from "../../data/PreparationStore";
+import { loreBookStore } from "../../data/PreparationStore";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
 import Input from "../MicroComps/Input";
 
@@ -22,7 +22,7 @@ export default function LorebookInput({
   name,
   inputable,
 }: LorebookInputProps) {
-  const [entries, setEntries] = useAtom(entryStore);
+  //const [entries, setEntries] = useAtom(entryStore);
   const [lorebook, setLorebook] = useAtom(loreBookStore);
 
   const [inputs, setInputs] = useState({
@@ -49,34 +49,48 @@ export default function LorebookInput({
 
     //Store the specific keys as arrays and the other inputs as strings
     if (ID === id.keys || ID === id.secondary_keys) {
-      setEntries((prev) => {
-        return prev.map((loreEntry) => {
-          if (loreEntry.id === inputable.id) {
-            return {
-              ...loreEntry,
-              [identifier]: event.target.value
-                .split(",")
-                .map((entry) => entry.trim()),
-            };
-          }
-          return loreEntry;
-        });
+      setLorebook((prev) => {
+        return {
+          ...prev,
+          entries: prev.entries.map((loreEntry) => {
+            if (loreEntry.id === inputable.id) {
+              return {
+                ...loreEntry,
+                [identifier]: event.target.value
+                  .split(",")
+                  .map((entry) => entry.trim()),
+              };
+            }
+            return loreEntry;
+          }),
+        };
       });
     } else {
-      setEntries((prev) => {
-        return prev.map((loreEntry) => {
-          if (loreEntry.id === inputable.id) {
-            return { ...loreEntry, [identifier]: event.target.value };
-          }
-          return loreEntry;
-        });
-      });
+      // setLorebook((prev) => {
+      //   return prev.entries.map((loreEntry) => {
+      //     if (loreEntry.id === inputable.id) {
+      //       return { ...loreEntry, [identifier]: event.target.value };
+      //     }
+      //     return loreEntry;
+      //   });
+      // });
+      setLorebook((prev) => {
+        return {
+          ...prev,
+          entries: prev.entries.map((loreEntry) => {
+            if (loreEntry.id === inputable.id) {
+              return { ...loreEntry, [identifier]: event.target.value };
+            }
+            return loreEntry;
+          }),
+        };
+      })
     }
   };
 
-  // useEffect(() => {
-  //   console.log(entries);
-  // }, [inputable, entries.length]);
+  useEffect(() => {
+    console.log(lorebook.entries);
+  }, [inputable, lorebook.entries.length]);
   return (
     <div className="flex flex-col gap-5">
       <div className="text-2xl font-semibold">{name}</div>
