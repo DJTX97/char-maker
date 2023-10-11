@@ -6,14 +6,11 @@ import LorebookInput from "../GeneralComps/LorebookInput";
 import SectionButton from "../MicroComps/SectionButton";
 import CleanupButton from "../MicroComps/CleanupButton";
 import Input from "../MicroComps/Input";
+import { LoreBookEntry } from "../../interfaces/V2CharSchema";
 
 export default function LorebookEditor() {
   const [file, setFile] = useAtom(fileStore);
   const [lorebook, setLorebook] = useAtom(loreBookStore);
-  //const [Entries, setEntries] = useAtom(entryStore);
-
-  //const [worldName, setWorldName] = useAtom(worldNameStore);
-
   const [KEYS, setKEYS] = useState<string[]>([]);
 
   const [ID, setID] = useState({
@@ -60,7 +57,7 @@ export default function LorebookEditor() {
   };
 
   const removeEntry = (index: number) => {
-    let newEntries = lorebook.entries
+    let newEntries = lorebook.entries;
     const newKEYS = [...KEYS];
 
     newEntries.splice(index, 1);
@@ -85,30 +82,22 @@ export default function LorebookEditor() {
     setLorebook({
       ...lorebook,
       entries: [],
-    })
+    });
   };
 
   const handleLoreName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLorebook({
       ...lorebook,
       name: event.target.value,
-    })
+    });
   };
 
-  // useEffect(() => {
-  //   if (Entries.length > 0) {
-  //     setLorebook({
-  //       entries: Entries,
-  //       name: worldName,
-  //     });
-  //   } else {
-  //     setLorebook(null);
-  //   }
-  // }, [Entries, worldName]);
-
-  // useEffect(() => {
-  //   console.log(lorebook);
-  // }, [lorebook]);
+  useEffect(() => { 
+    if (file) {
+      setKEYS(file.data.character_book.entries.map((_:LoreBookEntry) => uuidv4()));
+      setLorebook(file.data.character_book);
+    }
+  }, [file]);
   return (
     <section>
       <div className="flex justify-between mb-10 text-4xl font-semibold">

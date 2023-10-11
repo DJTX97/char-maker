@@ -1,25 +1,15 @@
-import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useAtom } from "jotai";
 import {
   altGreetStore,
-  //entryStore,
   fileStore,
   primaryInputStore,
-  //worldNameStore,
 } from "../../data/PreparationStore";
-import { v4 as uuidv4 } from "uuid";
-import { ID_Prefixes } from "../../configs/StaticInputConfigs.json";
-import { V2CharSchema } from "../../interfaces/V2CharSchema";
 
 const acceptedFileTypes = ["application/json", "image/png"];
 
-const Import = () => {
-  const [file, setFile] = useAtom(fileStore)
-  // const [entries, setEntries] = useAtom(entryStore);
-  // const [worldName, setWorldName] = useAtom(worldNameStore);
-  const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
-  const [altGreets, setAltGreets] = useAtom(altGreetStore);
+export default function Import() {
+  const [file, setFile] = useAtom(fileStore);
 
   const handleFile = async (file: any) => {
     if (file) {
@@ -62,6 +52,4 @@ const Import = () => {
       </div>
     </div>
   );
-};
-
-export default Import;
+}

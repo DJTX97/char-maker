@@ -3,6 +3,7 @@ import { saveAs } from "file-saver";
 import {
   altGreetStore,
   loreBookStore,
+  lorebookType,
   primaryInputStore,
 } from "../../data/PreparationStore";
 import { charStore } from "../../data/OutputStore";
@@ -15,8 +16,8 @@ export default function Export() {
   const [lorebook] = useAtom(loreBookStore);
 
   const [primaries, setPrimaries] = useState({});
-
   const [altGreetings, setAltGreetings] = useState<string[] | null>([]);
+  const [lore, setLore] = useState<lorebookType | null>(null);
 
   const [character, setCharacter] = useAtom(charStore);
 
@@ -47,6 +48,15 @@ export default function Export() {
     }
   }, [altGreets]);
 
+  //Prepare lore
+  useEffect(() => {
+    if (lorebook.entries.length > 0) {
+      setLore(lorebook);
+    } else {
+      setLore(null);
+    }
+  }, [lorebook]);
+
   // Prepare char
   useEffect(() => {
     setCharacter({
@@ -57,15 +67,20 @@ export default function Export() {
         ...primaries,
         avatar: "none",
         alternate_greetings: altGreetings,
-        character_book: lorebook,
+        character_book: lore,
         extensions: {},
       },
     });
-  }, [primaries, altGreetings, lorebook]);
+  }, [primaries, altGreetings, lore]);
+
+  useEffect(() => {
+    console.log(character);
+  }, [character]);
 
   // useEffect(() => {
-  //   console.log(character);
-  // }, [character]);
+  //   console.log(lorebook);
+  //   console.log(lore);
+  // }, [lore, lorebook]);
 
   const handleExport = () => {
     //console.log(character);

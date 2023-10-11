@@ -3,6 +3,7 @@ import { fileStore, primaryInputStore } from "../../data/PreparationStore";
 import PrimaryInput from "../GeneralComps/PrimaryInput";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
+import useUUID from "../../utils/customHooks/useUUID";
 
 interface PrimarySectionProps {
   title?: string;
@@ -11,7 +12,9 @@ interface PrimarySectionProps {
 export default function PrimarySection({ title }: PrimarySectionProps) {
   const [file, setFile] = useAtom(fileStore);
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
-  const [KEYS, setKEYS] = useState<string[]>([]);
+  //const [KEYS, setKEYS] = useState<string[]>([]);
+  const keys = useUUID(primaryInputs.length);
+  const [KEYS, setKEYS] = useState(keys);
 
   useEffect(() => {
     setKEYS(
@@ -31,11 +34,9 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
     }
   }, [file]);
 
-  useEffect(() => {}, []);
-
-  useEffect(() => {
-    console.log(KEYS);
-  }, [KEYS]);
+  // useEffect(() => {
+  //   console.log(KEYS);
+  // }, [KEYS]);
 
   return (
     <section>
