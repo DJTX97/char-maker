@@ -1,4 +1,3 @@
-//import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { fileStore, primaryInputStore } from "../../data/PreparationStore";
 import PrimaryInput from "../GeneralComps/PrimaryInput";
@@ -12,7 +11,6 @@ interface PrimarySectionProps {
 export default function PrimarySection({ title }: PrimarySectionProps) {
   const [file, setFile] = useAtom(fileStore);
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
-  const [MAIN_KEYS, set_MAIN_KEYS] = useState<string[]>([]);
   const [KEYS, setKEYS] = useState<string[]>([]);
 
   useEffect(() => {

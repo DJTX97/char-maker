@@ -54,32 +54,6 @@ const Import = () => {
     });
   };
 
-  // useEffect(() => {
-  //   if (file) {
-  //     if (file.data.alternate_greetings) {
-  //       setAltGreets(
-  //         file.data.alternate_greetings.map((greet: string, index: number) => {
-  //           return {
-  //             id: `altgreet-${uuidv4()}`,
-  //             name: `Alternative Greeting ${index + 1}`,
-  //             value: greet,
-  //           };
-  //         })
-  //       );
-  //     }
-  //     if (file.data.character_book) {
-  //       const importedLoreName = file.data.character_book.name;
-  //       setWorldName(importedLoreName);
-  //       // const importedLoreEntries = file.data.character_book.entries;
-  //       // setEntries(importedLoreEntries);
-  //     }
-  //   }
-  // }, [file]);
-
-  // useEffect(() => {
-  //   console.log(altGreets);
-  // }, [altGreets]);
-
   return (
     <div {...getRootProps()} className="h-20 text-center">
       <input className="h-full" {...getInputProps()} />
