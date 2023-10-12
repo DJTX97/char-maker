@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { LoreBookEntry } from "../interfaces/V2CharSchema";
+import { LoreBookEntry, V2CharSchema } from "../interfaces/V2CharSchema";
 import { PrimaryInputs } from "../configs/StaticInputConfigs.json";
 
 export interface PrimaryInputType {
@@ -31,5 +31,5 @@ const lorebook = {
 };
 export const loreBookStore = atom<lorebookType>(lorebook);
 
-const file: any = null;
-export const fileStore = atom(file);
+//const file: any = null;
+export const fileStore = atom<V2CharSchema | null>(null);

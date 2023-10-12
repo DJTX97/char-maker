@@ -7,7 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import SectionButton from "../MicroComps/SectionButton";
-import AltGreetInput from "../GeneralComps/AltGreetInput";
+import AltGreetInput from "../SectionInputs/AltGreetInput";
 import CleanupButton from "../MicroComps/CleanupButton";
 
 export default function AltGreetings() {

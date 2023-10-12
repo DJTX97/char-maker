@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { fileStore, primaryInputStore } from "../../data/PreparationStore";
-import PrimaryInput from "../GeneralComps/PrimaryInput";
+import PrimaryInput from "../SectionInputs/PrimaryInput";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import useUUID from "../../utils/customHooks/useUUID";

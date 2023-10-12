@@ -50,10 +50,10 @@ export default function Input({
     }
   }, [val]);
 
-  useEffect(() => {
-    console.log(val);
-    console.log(tokenizedValue);
-  }, [tokenizedValue]);
+  // useEffect(() => {
+  //   console.log(val);
+  //   console.log(tokenizedValue);
+  // }, [tokenizedValue]);
 
   return (
     <div className="w-full flex flex-col gap-3">
