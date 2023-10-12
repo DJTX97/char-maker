@@ -85,7 +85,7 @@ export default function LorebookInput({
             <option value="after_char">after character</option>
           </select>
         </div>
-        <div className="flex flex-col gap-5 w-full">
+        <div className="flex flex-col w-full">
           <div className="flex gap-5">
             <Input
               id={id.keys}
@@ -104,7 +104,7 @@ export default function LorebookInput({
               }
             />
           </div>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col">
             <Input
               id={id.content}
               name="Content"
