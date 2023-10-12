@@ -13,6 +13,13 @@
     { "id": "system_prompt", "name": "System Prompt", "value": "" },
     { "id": "post_history_instructions", "name": "Jailbreak", "value": "" }
   ],
+  "OldFormatInputs": [
+    "char_name",
+    "char_persona",
+    "char_greeting",
+    "world_scenario",
+    "example_dialogue"
+  ],
   "ID_Prefixes": [
     "name",
     "description",

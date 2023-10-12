@@ -27,7 +27,6 @@ export default function Input({
   const [file] = useAtom(fileStore);
   const [tokenizer, setTokenizer] = useState(false);
   const [tokenizedValue, setTokenizedValue] = useState("");
-  //const [tokenCounter, setTokenCounter] = useState(0);
 
   // Set tokenizer based on ID_TrackedPrefixes (runs only once, when the component is first rendered)
   useEffect(() => {
@@ -39,7 +38,9 @@ export default function Input({
 
   // Tokenize input
   useEffect(() => {
-    setTokenizedValue(llamaTokenizer.encode(val));
+    if (val) {
+      setTokenizedValue(llamaTokenizer.encode(val));
+    }
   }, [val]);
 
   // Autosize textarea to fit content
@@ -50,10 +51,10 @@ export default function Input({
     }
   }, [val]);
 
-  // useEffect(() => {
-  //   console.log(val);
-  //   console.log(tokenizedValue);
-  // }, [tokenizedValue]);
+  useEffect(() => {
+    console.log(val);
+    console.log(tokenizedValue);
+  }, [tokenizedValue]);
 
   return (
     <div className="w-full flex flex-col gap-3">
@@ -74,7 +75,9 @@ export default function Input({
         } p-2 rounded-lg resize-none overflow-hidden`}
       />
       {tokenizer && (
-        <div className="self-end">{tokenizedValue.length} Tokens</div>
+        <div className="self-end">
+          {val !== "" ? tokenizedValue.length : 0} Tokens
+        </div>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { V2CharSchema} from "../interfaces/V2CharSchema";
 
 // Some data may not be properly initialized on first render which causes the schema to throw a typescript error (workaround: set type to 'object')
-const character: V2CharSchema = {
+export const character: V2CharSchema = {
   spec: "chara_card_v2", // "chara_card_v2"
   spec_version: "2.0", // "2.0"
   data: {

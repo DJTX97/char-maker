@@ -93,10 +93,12 @@ export default function LorebookEditor() {
   };
 
   useEffect(() => { 
-    if (file) {
+    if (file?.data.character_book) {
       setCounter(file.data.character_book.entries.length + 1);
       setKEYS(file.data.character_book.entries.map((_:LoreBookEntry) => uuidv4()));
       setLorebook(file.data.character_book);
+    } else {
+      emptyStore();
     }
   }, [file]);
 
