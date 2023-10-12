@@ -25,6 +25,29 @@
     "tags",
     "creator_notes",
     "system_prompt",
-    "post_history_instructions"
+    "post_history_instructions",
+    "altgreet",
+    "lorebook",
+    "keys",
+    "secondary_keys",
+    "comment",
+    "content",
+    "position"
+  ],
+  "ID_TrackedPrefixes": [
+    "name",
+    "description",
+    "personality",
+    "mes_example",
+    "scenario",
+    "first_mes",
+    "system_prompt",
+    "post_history_instructions",
+    "altgreet",
+    "lorebook",
+    "keys",
+    "secondary_keys",
+    "comment",
+    "content"
   ]
 }

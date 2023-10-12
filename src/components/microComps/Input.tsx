@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ID_TrackedPrefixes } from "../../configs/StaticInputConfigs.json";
 
 interface InputProps {
   id: string;
@@ -20,6 +21,15 @@ export default function Input({
   width,
 }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [tokenizer, setTokenizer] = useState(false);
+
+  // Set tokenizer based on ID_TrackedPrefixes
+  useEffect(() => {
+    const shouldSetTokenizer = ID_TrackedPrefixes.some((prefix) =>
+      id.includes(prefix)
+    );
+    setTokenizer(shouldSetTokenizer);
+  }, [id]);
 
   // Autosize textarea to fit content
   useEffect(() => {
@@ -28,6 +38,11 @@ export default function Input({
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [val]);
+
+  useEffect(() => {
+    //console.log(tokenizer);
+    console.log(id);
+  }, [id]);
 
   return (
     <div className="w-full flex flex-col gap-3">
@@ -47,6 +62,7 @@ export default function Input({
           width && width
         } p-2 rounded-lg resize-none overflow-hidden`}
       />
+      {tokenizer && <div className="self-end">0 Tokens</div>}
     </div>
   );
 }
