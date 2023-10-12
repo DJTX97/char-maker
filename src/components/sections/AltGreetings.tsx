@@ -13,7 +13,6 @@ import CleanupButton from "../MicroComps/CleanupButton";
 export default function AltGreetings() {
   const [file, setFile] = useAtom(fileStore);
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
-  const [KEYS, setKEYS] = useState<string[]>([]);
 
   const handleAddGreet = () => {
     const greetIndex = altGreets.length + 1;
@@ -44,15 +43,7 @@ export default function AltGreetings() {
     setAltGreets([]);
   };
 
-  
-
   useEffect(() => {
-    // setKEYS(
-    //   altGreets.map((_) => {
-    //     return uuidv4();
-    //   })
-    // );
-
     if (file) {
       if (file.data.alternate_greetings) {
         setAltGreets(
@@ -64,6 +55,8 @@ export default function AltGreetings() {
             };
           })
         );
+      } else {
+        setAltGreets([]);
       }
     }
   }, [file]);

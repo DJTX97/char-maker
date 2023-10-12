@@ -73,9 +73,9 @@ export default function Export() {
     });
   }, [primaries, altGreetings, lore]);
 
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
+  // useEffect(() => {
+  //   console.log(character);
+  // }, [character]);
 
   // useEffect(() => {
   //   console.log(lorebook);

@@ -94,10 +94,16 @@ export default function LorebookEditor() {
 
   useEffect(() => { 
     if (file) {
+      setCounter(file.data.character_book.entries.length + 1);
       setKEYS(file.data.character_book.entries.map((_:LoreBookEntry) => uuidv4()));
       setLorebook(file.data.character_book);
     }
   }, [file]);
+
+  // useEffect(() => {
+  //   console.log(lorebook);
+  // }, [lorebook]);
+
   return (
     <section>
       <div className="flex justify-between mb-10 text-4xl font-semibold">
