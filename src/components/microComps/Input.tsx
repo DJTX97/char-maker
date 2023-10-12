@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useAtom } from "jotai";
+import { fileStore } from "../../data/PreparationStore";
 import { ID_TrackedPrefixes } from "../../configs/StaticInputConfigs.json";
+import llamaTokenizer from "llama-tokenizer-js";
 
 interface InputProps {
   id: string;
@@ -21,15 +24,23 @@ export default function Input({
   width,
 }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [file] = useAtom(fileStore);
   const [tokenizer, setTokenizer] = useState(false);
+  const [tokenizedValue, setTokenizedValue] = useState("");
+  //const [tokenCounter, setTokenCounter] = useState(0);
 
-  // Set tokenizer based on ID_TrackedPrefixes
+  // Set tokenizer based on ID_TrackedPrefixes (runs only once, when the component is first rendered)
   useEffect(() => {
     const shouldSetTokenizer = ID_TrackedPrefixes.some((prefix) =>
       id.includes(prefix)
     );
     setTokenizer(shouldSetTokenizer);
   }, [id]);
+
+  // Tokenize input
+  useEffect(() => {
+    setTokenizedValue(llamaTokenizer.encode(val));
+  }, [val]);
 
   // Autosize textarea to fit content
   useEffect(() => {
@@ -40,9 +51,9 @@ export default function Input({
   }, [val]);
 
   useEffect(() => {
-    //console.log(tokenizer);
-    console.log(id);
-  }, [id]);
+    console.log(val);
+    console.log(tokenizedValue);
+  }, [tokenizedValue]);
 
   return (
     <div className="w-full flex flex-col gap-3">
@@ -62,7 +73,9 @@ export default function Input({
           width && width
         } p-2 rounded-lg resize-none overflow-hidden`}
       />
-      {tokenizer && <div className="self-end">0 Tokens</div>}
+      {tokenizer && (
+        <div className="self-end">{tokenizedValue.length} Tokens</div>
+      )}
     </div>
   );
 }
