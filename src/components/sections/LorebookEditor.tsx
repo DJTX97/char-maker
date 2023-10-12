@@ -80,8 +80,8 @@ export default function LorebookEditor() {
 
   const emptyStore = () => {
     setLorebook({
-      ...lorebook,
       entries: [],
+      name: "",
     });
   };
 
