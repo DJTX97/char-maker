@@ -1,6 +1,4 @@
 import { useAtom } from "jotai";
-import { saveAs } from "file-saver";
-import { addMetadataFromBase64DataURI } from 'meta-png'
 import {
   altGreetStore,
   loreBookStore,
@@ -10,8 +8,7 @@ import {
 import { charStore, imageStore, imageURLStore } from "../../data/OutputStore";
 import SectionButton from "../MicroComps/SectionButton";
 import { useEffect, useState } from "react";
-import { b64EncodeUnicode } from "../../utils/scripts/encoders";
-import { V2CharSchema } from "../../interfaces/V2CharSchema";
+import { exportJson, exportPng } from "../../utils/scripts/exporters";
 
 export default function Export() {
   const [primaryInputs] = useAtom(primaryInputStore);
@@ -36,7 +33,7 @@ export default function Export() {
           if (typeof input.value === "string") {
             acc[input.id] = input.value.split(",").map((tag) => tag.trim());
           } else {
-            acc[input.id] = [];
+            acc[input.id] = [...input.value];
           }
         } else {
           acc[input.id] = input.value;
@@ -80,21 +77,15 @@ export default function Export() {
     });
   }, [primaries, altGreetings, lore]);
 
-  const exportCharacterAsPng = (characterData: V2CharSchema, image: string): string => {
-    const stringifiedCharacterData = JSON.stringify(characterData)
-    const dataOnBase64 = b64EncodeUnicode(stringifiedCharacterData)
-    const imageToExportAsUrlData = addMetadataFromBase64DataURI(image, 'chara', dataOnBase64)
-    return imageToExportAsUrlData
-  }
+  useEffect(() => {
+    console.log(character);
+  }, [character])
 
   const handleExport = () => {
     if (exportFormat === "json") {
-      const jsonCharacter = JSON.stringify(character);
-      const blob = new Blob([jsonCharacter], { type: "application/json" });
-      saveAs(blob, `${character.data.name}.V2.json`);
+      exportJson(character);
     } else if (exportFormat === "png" && image) {
-      const imageToExport = exportCharacterAsPng(character, image)
-      saveAs(imageToExport, `${character.data.name}.V2.png`);
+      exportPng(character, image);
     } else {
       alert("Invalid export format");
     }

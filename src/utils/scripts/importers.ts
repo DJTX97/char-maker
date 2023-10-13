@@ -1,7 +1,7 @@
 import { OldFormatInputs } from "../../configs/StaticInputConfigs.json";
 import { character } from "../../data/OutputStore";
 import { getMetadata } from "meta-png";
-import { b64DecodeUnicode } from "../../utils/scripts/encoders";
+import { b64DecodeUnicode } from "./encoders";
 
 export const handleJSON = async (file: any, setFileInput: any) => {
   let fileContents = await file.text();

@@ -2,7 +2,7 @@ import { useDropzone } from "react-dropzone";
 import { useAtom } from "jotai";
 import { fileStore } from "../../data/PreparationStore";
 import { imageStore, imageURLStore } from "../../data/OutputStore";
-import { handleJSON, handlePNG } from "../../utils/scripts/fileHandlers";
+import { handleJSON, handlePNG } from "../../utils/scripts/importers";
 import { useEffect, useState } from "react";
 
 const acceptedFileTypes = ["application/json", "image/png"];
