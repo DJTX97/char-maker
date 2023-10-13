@@ -60,7 +60,7 @@ export default function SectionButton({
     <button
       id={name}
       onClick={handleClick}
-      className="mt-6 p-5 rounded-xl bg-black hover:bg-gray-600 text-xl text-white"
+      className={`p-5 rounded-xl bg-black hover:bg-gray-600 text-xl text-white`}
     >
       {name}
     </button>

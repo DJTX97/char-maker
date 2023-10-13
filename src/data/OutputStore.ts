@@ -30,6 +30,10 @@ export const character: V2CharSchema = {
 
 export const charStore = atom(character);
 
+export const imageURLStore = atom<string | null>(null);
+
+export const imageStore = atom<string>("");
+
 
 
 

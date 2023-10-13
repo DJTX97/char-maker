@@ -141,7 +141,7 @@ export default function LorebookEditor() {
           );
         })}
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-6">
         <SectionButton
           destinations={lorebook.entries}
           handler={addEntry}

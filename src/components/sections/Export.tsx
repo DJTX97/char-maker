@@ -1,14 +1,17 @@
 import { useAtom } from "jotai";
 import { saveAs } from "file-saver";
+import { addMetadataFromBase64DataURI } from 'meta-png'
 import {
   altGreetStore,
   loreBookStore,
   lorebookType,
   primaryInputStore,
 } from "../../data/PreparationStore";
-import { charStore } from "../../data/OutputStore";
+import { charStore, imageStore, imageURLStore } from "../../data/OutputStore";
 import SectionButton from "../MicroComps/SectionButton";
 import { useEffect, useState } from "react";
+import { b64EncodeUnicode } from "../../utils/scripts/encoders";
+import { V2CharSchema } from "../../interfaces/V2CharSchema";
 
 export default function Export() {
   const [primaryInputs] = useAtom(primaryInputStore);
@@ -19,7 +22,11 @@ export default function Export() {
   const [altGreetings, setAltGreetings] = useState<string[] | null>([]);
   const [lore, setLore] = useState<lorebookType | null>(null);
 
+  const [image, setImage] = useAtom(imageStore);
+  const [imageURL, setImageURL] = useAtom(imageURLStore);
   const [character, setCharacter] = useAtom(charStore);
+
+  const [exportFormat, setExportFormat] = useState("png");
 
   //Prepare Primary Inputs
   useEffect(() => {
@@ -73,24 +80,36 @@ export default function Export() {
     });
   }, [primaries, altGreetings, lore]);
 
-  // useEffect(() => {
-  //   console.log(character);
-  // }, [character]);
-
-  // useEffect(() => {
-  //   console.log(lorebook);
-  //   console.log(lore);
-  // }, [lore, lorebook]);
+  const exportCharacterAsPng = (characterData: V2CharSchema, image: string): string => {
+    const stringifiedCharacterData = JSON.stringify(characterData)
+    const dataOnBase64 = b64EncodeUnicode(stringifiedCharacterData)
+    const imageToExportAsUrlData = addMetadataFromBase64DataURI(image, 'chara', dataOnBase64)
+    return imageToExportAsUrlData
+  }
 
   const handleExport = () => {
-    //console.log(character);
-    const jsonCharacter = JSON.stringify(character);
-    const blob = new Blob([jsonCharacter], { type: "application/json" });
-    saveAs(blob, `${character.data.name}.V2.json`);
+    if (exportFormat === "json") {
+      const jsonCharacter = JSON.stringify(character);
+      const blob = new Blob([jsonCharacter], { type: "application/json" });
+      saveAs(blob, `${character.data.name}.V2.json`);
+    } else if (exportFormat === "png" && image) {
+      const imageToExport = exportCharacterAsPng(character, image)
+      saveAs(imageToExport, `${character.data.name}.V2.png`);
+    } else {
+      alert("Invalid export format");
+    }
   };
 
   return (
-    <section>
+    <section className="flex flex-col h-40">
+      <select
+        className="self-end p-3 rounded-lg bg-white"
+        value={exportFormat}
+        onChange={(event) => setExportFormat(event.target.value)}
+      >
+        <option value="png">PNG</option>
+        <option value="json">JSON</option>
+      </select>
       <div className="flex justify-center">
         <SectionButton name="Export Character" handler={handleExport} />
       </div>

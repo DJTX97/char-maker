@@ -89,7 +89,7 @@ export default function AltGreetings() {
           </div>
         ))}
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-6">
         <SectionButton
           destinations={altGreets}
           handler={handleAddGreet}

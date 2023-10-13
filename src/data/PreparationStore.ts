@@ -33,3 +33,5 @@ export const loreBookStore = atom<lorebookType>(lorebook);
 
 //const file: any = null;
 export const fileStore = atom<V2CharSchema | null>(null);
+
+
