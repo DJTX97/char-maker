@@ -1,7 +1,7 @@
 import { useDropzone } from "react-dropzone";
 import { useAtom } from "jotai";
 import { fileStore } from "../../data/PreparationStore";
-import { handleJSON, handlePNG } from "../../utils/fileHandlers/fileHandlers";
+import { handleJSON, handlePNG } from "../../utils/scripts/fileHandlers";
 import { useEffect, useState } from "react";
 
 const acceptedFileTypes = ["application/json", "image/png"];
@@ -12,13 +12,13 @@ export default function Import() {
 
   const handleFile = async (file: any) => {
     if (file) {
-      console.log(file);
+      //console.log(file);
 
       if (file.type === "application/json") {
         handleJSON(file, setFileInput);
       } else if (file.type === "image/png") {
-        //handlePNG(file, setFileInput);
         setImageURL(URL.createObjectURL(file));
+        handlePNG(file, setFileInput);
       } else {
         alert("Wrong file type! Only JSON or PNG files are allowed.");
       }
