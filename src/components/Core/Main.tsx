@@ -1,17 +1,17 @@
-import AltGreetings from "../SectionComps/AltGreetings";
-import LorebookEditor from "../SectionComps/LorebookEditor";
-import Export from "../SectionComps/Export";
-import Import from "../SectionComps/Import";
-import PrimarySection from "../SectionComps/PrimarySection";
+import AltGreetings from "../Sections/AltGreetings";
+import LorebookEditor from "../Sections/LorebookEditor";
+import Export from "../Sections/Export";
+import Import from "../Sections/Import";
+import PrimarySection from "../Sections/PrimarySection";
 
 export default function Main() {
   return (
     <main className="flex flex-col items-center gap-32 px-10 md:px-20 lg:px-40">
       <Import />
-      <PrimarySection />
+      <PrimarySection key={"basic"} />
       <AltGreetings />
       <LorebookEditor />
-      <PrimarySection title="Metadata" />
+      <PrimarySection key={"metadata"} title="Metadata" />
       <Export />
     </main>
   );

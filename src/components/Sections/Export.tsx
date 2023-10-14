@@ -5,7 +5,7 @@ import {
   lorebookType,
   primaryInputStore,
 } from "../../data/PreparationStore";
-import { charStore, imageStore } from "../../data/OutputStore";
+import { character, charStore, imageStore } from "../../data/OutputStore";
 import SectionButton from "../Micros/SectionButton";
 import { useEffect, useState } from "react";
 import { exportJson, exportPng } from "../../utils/scripts/exporters";
@@ -20,7 +20,7 @@ export default function Export() {
   const [lore, setLore] = useState<lorebookType | null>(null);
 
   const [image] = useAtom(imageStore);
-  const [character, setCharacter] = useAtom(charStore);
+  const [char, setChar] = useAtom(charStore);
 
   const [exportFormat, setExportFormat] = useState("png");
 
@@ -87,7 +87,7 @@ export default function Export() {
 
   // Prepare char
   useEffect(() => {
-    setCharacter({
+    setChar({
       spec: "chara_card_v2",
       spec_version: "2.0",
       data: {
@@ -106,14 +106,14 @@ export default function Export() {
   // }, [character])
 
   // useEffect(() => {
-  //   console.log(lorebook)
-  // }, [lorebook])
+  //   console.log(primaries)
+  // }, [primaries])
 
   const handleExport = () => {
     if (exportFormat === "json") {
-      exportJson(character);
+      exportJson(char);
     } else if (exportFormat === "png" && image) {
-      exportPng(character, image);
+      exportPng(char, image);
     } else {
       alert("Invalid export format");
     }
