@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { altGreetStore } from "../../data/PreparationStore";
-import Input from "../MicroComps/Input";
+import Input from "../Micros/Input";
 
 interface AltGreetProps {
   id: string;

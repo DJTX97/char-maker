@@ -6,9 +6,9 @@ import {
 } from "../../data/PreparationStore";
 import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import SectionButton from "../MicroComps/SectionButton";
+import SectionButton from "../Micros/SectionButton";
 import AltGreetInput from "../SectionInputs/AltGreetInput";
-import CleanupButton from "../MicroComps/CleanupButton";
+import CleanupButton from "../Micros/CleanupButton";
 
 export default function AltGreetings() {
   const [file] = useAtom(fileStore);

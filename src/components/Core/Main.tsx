@@ -1,8 +1,8 @@
-import AltGreetings from "../Sections/AltGreetings";
-import LorebookEditor from "../Sections/LorebookEditor";
-import Export from "../Sections/Export";
-import Import from "../Sections/Import";
-import PrimarySection from "../Sections/PrimarySection";
+import AltGreetings from "../SectionComps/AltGreetings";
+import LorebookEditor from "../SectionComps/LorebookEditor";
+import Export from "../SectionComps/Export";
+import Import from "../SectionComps/Import";
+import PrimarySection from "../SectionComps/PrimarySection";
 
 export default function Main() {
   return (

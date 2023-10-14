@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAtom } from "jotai";
 import { loreBookStore } from "../../data/PreparationStore";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
-import Input from "../MicroComps/Input";
+import Input from "../Micros/Input";
 
 interface LorebookInputProps {
   id: {
