@@ -3,9 +3,9 @@ import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 import { fileStore, loreBookStore } from "../../data/PreparationStore";
 import LorebookInput from "../SectionInputs/LorebookInput";
-import SectionButton from "../MicroComps/SectionButton";
-import CleanupButton from "../MicroComps/CleanupButton";
-import Input from "../MicroComps/Input";
+import SectionButton from "../Micros/SectionButton";
+import CleanupButton from "../Micros/CleanupButton";
+import Input from "../Micros/Input";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
 
 export default function LorebookEditor() {

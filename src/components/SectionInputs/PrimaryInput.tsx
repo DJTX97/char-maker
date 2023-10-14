@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { primaryInputStore } from "../../data/PreparationStore";
-import Input from "../MicroComps/Input";
+import Input from "../Micros/Input";
 
 interface MetadataInputProps {
   id: string;

@@ -6,7 +6,7 @@ import {
   primaryInputStore,
 } from "../../data/PreparationStore";
 import { charStore, imageStore } from "../../data/OutputStore";
-import SectionButton from "../MicroComps/SectionButton";
+import SectionButton from "../Micros/SectionButton";
 import { useEffect, useState } from "react";
 import { exportJson, exportPng } from "../../utils/scripts/exporters";
 
