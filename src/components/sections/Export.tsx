@@ -28,14 +28,16 @@ export default function Export() {
   useEffect(() => {
     setPrimaries(
       primaryInputs.reduce((acc: any, input) => {
-        if (input.id === "tags") {
-          if (typeof input.value === "string") {
-            acc[input.id] = input.value.split(",").map((tag) => tag.trim());
+        if (input.value) {
+          if (input.id === "tags") {
+            if (typeof input.value === "string") {
+              acc[input.id] = input.value.split(",").map((tag) => tag.trim());
+            } else {
+              acc[input.id] = [...input.value];
+            }
           } else {
-            acc[input.id] = [...input.value];
+            acc[input.id] = input.value;
           }
-        } else {
-          acc[input.id] = input.value;
         }
         return acc;
       }, {})
@@ -59,8 +61,14 @@ export default function Export() {
         entries: lorebook.entries.map((entry) => {
           return {
             id: entry.id,
-            keys: typeof entry.keys === 'string' ? entry.keys.split(",").map((key) => key.trim()) : [],
-            secondary_keys: typeof entry.secondary_keys === 'string' ? entry.secondary_keys.split(",").map((key) => key.trim()) : [],
+            keys:
+              typeof entry.keys === "string"
+                ? entry.keys.split(",").map((key) => key.trim())
+                : [],
+            secondary_keys:
+              typeof entry.secondary_keys === "string"
+                ? entry.secondary_keys.split(",").map((key) => key.trim())
+                : [],
             comment: entry.comment,
             content: entry.content,
             constant: entry.constant,
@@ -70,7 +78,7 @@ export default function Export() {
             position: entry.position,
             extensions: entry.extensions,
           };
-        })
+        }),
       });
     } else {
       setLore(null);
@@ -112,16 +120,16 @@ export default function Export() {
   };
 
   return (
-    <section className="flex flex-col h-40">
+    <section className="flex flex-row-reverse sm:flex-col gap-5 w-full md:w-1/2">
       <select
-        className="self-end p-3 rounded-lg bg-white"
+        className="self-center sm:self-end p-3 rounded-lg bg-white"
         value={exportFormat}
         onChange={(event) => setExportFormat(event.target.value)}
       >
         <option value="png">PNG</option>
         <option value="json">JSON</option>
       </select>
-      <div className="flex justify-center">
+      <div className="flex justify-center h-1/2">
         <SectionButton name="Export Character" handler={handleExport} />
       </div>
     </section>

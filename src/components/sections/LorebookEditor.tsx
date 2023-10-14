@@ -108,7 +108,7 @@ export default function LorebookEditor() {
   // }, [lorebook]);
 
   return (
-    <section>
+    <section className="w-full">
       <div className="flex justify-between mb-10 text-4xl font-semibold">
         <div>Lorebook</div>
         <CleanupButton cleanupMethod={emptyStore} />

@@ -65,7 +65,7 @@ export default function AltGreetings() {
 
   //Keys must be UNIQUE for dynamically added/removed inputs to avoid key overlap. (DON'T USE THEIR INDEX!)
   return (
-    <section>
+    <section className="w-full">
       <div className="flex justify-between mb-10 text-4xl font-semibold">
         <div>Alternative Greetings</div>
         <CleanupButton cleanupMethod={emptyStore} />

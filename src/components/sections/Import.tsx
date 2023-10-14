@@ -40,8 +40,8 @@ export default function Import() {
     <section
       {...getRootProps()}
       className={`${
-        imageURL && "self-center"
-      } h-96 border-4 rounded-xl border-violet-800 ${
+        imageURL && "self-center w-fit"
+      } h-96 w-full border-4 rounded-xl border-violet-800 ${
         isDragActive ? "bg-violet-300" : "bg-violet-400"
       } hover:bg-violet-300 cursor-pointer`}
     >

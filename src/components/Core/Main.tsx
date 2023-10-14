@@ -6,7 +6,7 @@ import PrimarySection from "../Sections/PrimarySection";
 
 export default function Main() {
   return (
-    <main className="flex flex-col gap-32 px-10 md:px-20 lg:px-40">
+    <main className="flex flex-col items-center gap-32 px-10 md:px-20 lg:px-40">
       <Import />
       <PrimarySection />
       <AltGreetings />

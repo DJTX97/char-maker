@@ -39,7 +39,7 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
   // }, [KEYS]);
 
   return (
-    <section>
+    <section className="w-full">
       {title && (
         <div className="flex justify-between mb-10 text-4xl font-semibold">
           <div>{title}</div>
