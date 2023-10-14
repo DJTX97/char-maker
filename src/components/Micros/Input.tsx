@@ -59,7 +59,7 @@ export default function Input({
   return (
     <div className="w-full flex flex-col gap-4">
       {name && (
-        <div className={`${nameSize ? nameSize : "text-2xl"} font-semibold`}>
+        <div className={`${nameSize ? nameSize : "text-2xl"} dark:text-white font-semibold`}>
           {name}
         </div>
       )}
@@ -72,10 +72,10 @@ export default function Input({
         onChange={changeHandler}
         className={`${
           width && width
-        } p-2 rounded-lg resize-none overflow-hidden`}
+        } p-2 dark:bg-slate-700 dark:text-white rounded-lg resize-none overflow-hidden`}
       />
       {tokenizer && (
-        <div className="self-end">
+        <div className="self-end font-semibold dark:text-white">
           {val !== "" ? tokenizedValue.length : 0} Tokens
         </div>
       )}

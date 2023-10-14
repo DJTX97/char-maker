@@ -7,6 +7,7 @@ import SectionButton from "../Micros/SectionButton";
 import CleanupButton from "../Micros/CleanupButton";
 import Input from "../Micros/Input";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
+import SectionTitle from "../Micros/SectionTitle";
 
 export default function LorebookEditor() {
   const [file] = useAtom(fileStore);
@@ -110,7 +111,7 @@ export default function LorebookEditor() {
   return (
     <section className="w-full">
       <div className="flex justify-between mb-10 text-4xl font-semibold">
-        <div>Lorebook</div>
+        <SectionTitle title="Lorebook" />
         <CleanupButton cleanupMethod={emptyStore} />
       </div>
       <Input
