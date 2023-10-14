@@ -4,6 +4,7 @@ import PrimaryInput from "../SectionInputs/PrimaryInput";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import useUUID from "../../utils/customHooks/useUUID";
+import SectionTitle from "../Micros/SectionTitle";
 
 interface PrimarySectionProps {
   title?: string;
@@ -43,8 +44,7 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
     <section className="w-full">
       {title && (
         <div className="flex justify-between mb-10 text-4xl font-semibold">
-          <div>{title}</div>
-          {/* <CleanupButton cleanupMethod={emptyStore} /> */}
+          <SectionTitle title={title} />
         </div>
       )}
       <div className="flex flex-col gap-5">

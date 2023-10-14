@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import SectionButton from "../Micros/SectionButton";
 import AltGreetInput from "../SectionInputs/AltGreetInput";
 import CleanupButton from "../Micros/CleanupButton";
+import SectionTitle from "../Micros/SectionTitle";
 
 export default function AltGreetings() {
   const [file] = useAtom(fileStore);
@@ -67,7 +68,7 @@ export default function AltGreetings() {
   return (
     <section className="w-full">
       <div className="flex justify-between mb-10 text-4xl font-semibold">
-        <div>Alternative Greetings</div>
+        <SectionTitle title="Alternative Greetings" />
         <CleanupButton cleanupMethod={emptyStore} />
       </div>
       <div className="flex flex-col gap-10">
