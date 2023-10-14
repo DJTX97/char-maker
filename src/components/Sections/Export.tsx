@@ -36,7 +36,7 @@ export default function Export() {
               acc[input.id] = [...input.value];
             }
           } else {
-            acc[input.id] = input.value;
+            acc[input.id] = input.value.trim();
           }
         }
         return acc;
@@ -47,7 +47,7 @@ export default function Export() {
   //Prepare alternative greetings
   useEffect(() => {
     if (altGreets.length > 0) {
-      setAltGreetings(altGreets.map((altGreet) => altGreet.value));
+      setAltGreetings(altGreets.map((altGreet) => altGreet.value.trim()));
     } else {
       setAltGreetings(null);
     }
@@ -57,7 +57,7 @@ export default function Export() {
   useEffect(() => {
     if (lorebook.entries.length > 0) {
       setLore({
-        name: lorebook.name,
+        name: lorebook.name.trim(),
         entries: lorebook.entries.map((entry) => {
           return {
             id: entry.id,
@@ -69,8 +69,8 @@ export default function Export() {
               typeof entry.secondary_keys === "string"
                 ? entry.secondary_keys.split(",").map((key) => key.trim())
                 : [],
-            comment: entry.comment,
-            content: entry.content,
+            comment: entry.comment.trim(),
+            content: entry.content.trim(),
             constant: entry.constant,
             selective: entry.selective,
             insertion_order: entry.insertion_order,
