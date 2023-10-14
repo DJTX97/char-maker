@@ -8,10 +8,10 @@ export default function Main() {
   return (
     <main className="flex flex-col items-center gap-32 px-10 md:px-20 lg:px-40">
       <Import />
-      <PrimarySection key={"basic"} />
+      <PrimarySection />
       <AltGreetings />
       <LorebookEditor />
-      <PrimarySection key={"metadata"} title="Metadata" />
+      <PrimarySection title="Metadata" />
       <Export />
     </main>
   );
