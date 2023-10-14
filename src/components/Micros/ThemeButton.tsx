@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 
 export default function ThemeButton() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
 
   useEffect(() => {
     if (theme === "dark") {
