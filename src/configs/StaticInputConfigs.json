@@ -1,0 +1,59 @@
+{
+  "PrimaryInputs": [
+    { "id": "name", "name": "Name", "value": "" },
+    { "id": "description", "name": "Description", "value": "" },
+    { "id": "personality", "name": "Personality", "value": "" },
+    { "id": "mes_example", "name": "Example Messages", "value": "" },
+    { "id": "scenario", "name": "Scenario", "value": "" },
+    { "id": "first_mes", "name": "Greeting", "value": "" },
+    { "id": "creator", "name": "Creator", "value": "" },
+    { "id": "character_version", "name": "Version", "value": "" },
+    { "id": "tags", "name": "Tags", "value": "" },
+    { "id": "creator_notes", "name": "Notes", "value": "" },
+    { "id": "system_prompt", "name": "System Prompt", "value": "" },
+    { "id": "post_history_instructions", "name": "Jailbreak", "value": "" }
+  ],
+  "OldFormatInputs": [
+    "char_name",
+    "char_persona",
+    "char_greeting",
+    "world_scenario",
+    "example_dialogue"
+  ],
+  "ID_Prefixes": [
+    "name",
+    "description",
+    "personality",
+    "mes_example",
+    "scenario",
+    "first_mes",
+    "creator",
+    "character_version",
+    "tags",
+    "creator_notes",
+    "system_prompt",
+    "post_history_instructions",
+    "altgreet",
+    "lorebook",
+    "keys",
+    "secondary_keys",
+    "comment",
+    "content",
+    "position"
+  ],
+  "ID_TrackedPrefixes": [
+    "name",
+    "description",
+    "personality",
+    "mes_example",
+    "scenario",
+    "first_mes",
+    "system_prompt",
+    "post_history_instructions",
+    "altgreet",
+    "lorebook",
+    "keys",
+    "secondary_keys",
+    "content"
+  ]
+}
