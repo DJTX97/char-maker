@@ -72,7 +72,7 @@ export default function AltGreetings() {
       </div>
       <div className="flex flex-col gap-10">
         {altGreets.map((altGreet, index) => (
-          <div className="flex gap-10" key={altGreet.id}>
+          <div className="relative flex sm:gap-10" key={altGreet.id}>
             <AltGreetInput
               id={altGreet.id}
               name={altGreet.name}
@@ -81,7 +81,7 @@ export default function AltGreetings() {
             <div className="flex items-center">
               <button
                 onClick={() => handleRemoveGreet(altGreet.id)}
-                className="p-3 rounded-full bg-black hover:bg-gray-600 text-white"
+                className="absolute -top-2 right-0 sm:static p-3 rounded-full bg-black hover:bg-gray-600 text-white"
               >
                 Delete
               </button>

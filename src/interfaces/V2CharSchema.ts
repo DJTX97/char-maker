@@ -1,7 +1,7 @@
 export interface LoreBookEntry {
   id: number; // id starts at 1
-  keys: string[]; //should be an array
-  secondary_keys: string[]; //should be an array
+  keys: string | string[]; //should be an array at the end
+  secondary_keys: string | string[]; //should be an array at the end
   comment: string;
   content: string;
   constant: boolean; //default: true

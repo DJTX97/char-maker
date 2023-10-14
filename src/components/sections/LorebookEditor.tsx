@@ -19,14 +19,15 @@ export default function LorebookEditor() {
     comment: `comment-${uuidv4()}`,
     content: `content-${uuidv4()}`,
     position: `position-${uuidv4()}`,
+    constant: `constant-${uuidv4()}`,
   });
 
   const [counter, setCounter] = useState(1);
 
   const newEntry = {
     id: counter, //dynamic starting from 1
-    keys: [],
-    secondary_keys: [],
+    keys: "",
+    secondary_keys: "",
     comment: "",
     content: "",
     constant: false, // default false

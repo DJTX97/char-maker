@@ -27,7 +27,7 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
         prev.map((input) => {
           return {
             ...input,
-            value: file.data[input.id],
+            value: file.data[input.id], //meaningless typescript error
           };
         })
       );

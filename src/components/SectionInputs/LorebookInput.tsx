@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { loreBookStore } from "../../data/PreparationStore";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
@@ -11,6 +11,7 @@ interface LorebookInputProps {
     comment: string;
     content: string;
     position: string;
+    constant: string;
   };
   index?: number;
   name?: string;
@@ -24,17 +25,21 @@ export default function LorebookInput({
 }: LorebookInputProps) {
   const [lorebook, setLorebook] = useAtom(loreBookStore);
 
+  const [checkbox, setCheckbox] = useState(inputable.constant);
+
   const handleValueChange = (
     event:
       | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>,
     ID: string
   ) => {
     //Get property identifier from ID
     const identifier = ID.split("-")[0];
 
-    //Store the specific keys as arrays and the other inputs as strings
-    if (ID === id.keys || ID === id.secondary_keys) {
+    //Store inputs accordingly
+    if (ID === id.constant) {
+      setCheckbox(prev => !prev);
       setLorebook((prev) => {
         return {
           ...prev,
@@ -42,15 +47,13 @@ export default function LorebookInput({
             if (loreEntry.id === inputable.id) {
               return {
                 ...loreEntry,
-                [identifier]: event.target.value
-                  .split(",")
-                  .map((entry) => entry.trim()),
+                [identifier]: (event.target as HTMLInputElement).checked,
               };
             }
             return loreEntry;
           }),
         };
-      });
+      })
     } else {
       setLorebook((prev) => {
         return {
@@ -67,16 +70,30 @@ export default function LorebookInput({
   };
 
   // useEffect(() => {
+  //   console.log(checkbox);
+  // }, [checkbox])
+
+  // useEffect(() => {
   //   console.log(lorebook.entries);
   //   console.log(inputable)
   // }, [inputable]);
   return (
     <div className="flex flex-col gap-5">
       <div className="text-2xl font-semibold">{name}</div>
-      <div className="flex gap-10">
-        <div>
+      <div className="flex flex-col sm:flex-row gap-10">
+        <div className="flex flex-col gap-5 mt-10">
+          <div className="flex items-center gap-3 font-semibold">
+            <input
+              type="checkbox"
+              className="ml-2 scale-[1.6]"
+              id={id.constant}
+              checked={checkbox}
+              onChange={(event) => handleValueChange(event, id.constant)}
+            />
+            <div>Constant</div>
+          </div>
           <select
-            name="select"
+            className="p-3 rounded-lg bg-white"
             id={id.position}
             value={inputable.position}
             onChange={(event) => handleValueChange(event, id.position)}
@@ -85,20 +102,21 @@ export default function LorebookInput({
             <option value="after_char">after character</option>
           </select>
         </div>
+
         <div className="flex flex-col w-full">
-          <div className="flex gap-5">
+          <div className="flex flex-col sm:flex-row gap-5">
             <Input
               id={id.keys}
               name="Primary Keys"
               nameSize="text-xl"
-              val={inputable.keys.join(", ")}
+              val={inputable.keys}
               changeHandler={(event) => handleValueChange(event, id.keys)}
             />
             <Input
               id={id.secondary_keys}
               name="Secondary Keys"
               nameSize="text-xl"
-              val={inputable.secondary_keys.join(", ")}
+              val={inputable.secondary_keys}
               changeHandler={(event) =>
                 handleValueChange(event, id.secondary_keys)
               }

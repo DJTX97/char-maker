@@ -5,7 +5,7 @@ import {
   lorebookType,
   primaryInputStore,
 } from "../../data/PreparationStore";
-import { charStore, imageStore, imageURLStore } from "../../data/OutputStore";
+import { charStore, imageStore } from "../../data/OutputStore";
 import SectionButton from "../MicroComps/SectionButton";
 import { useEffect, useState } from "react";
 import { exportJson, exportPng } from "../../utils/scripts/exporters";
@@ -20,7 +20,6 @@ export default function Export() {
   const [lore, setLore] = useState<lorebookType | null>(null);
 
   const [image, setImage] = useAtom(imageStore);
-  const [imageURL, setImageURL] = useAtom(imageURLStore);
   const [character, setCharacter] = useAtom(charStore);
 
   const [exportFormat, setExportFormat] = useState("png");
@@ -55,7 +54,24 @@ export default function Export() {
   //Prepare lore
   useEffect(() => {
     if (lorebook.entries.length > 0) {
-      setLore(lorebook);
+      setLore({
+        name: lorebook.name,
+        entries: lorebook.entries.map((entry) => {
+          return {
+            id: entry.id,
+            keys: typeof entry.keys === 'string' ? entry.keys.split(",").map((key) => key.trim()) : [],
+            secondary_keys: typeof entry.secondary_keys === 'string' ? entry.secondary_keys.split(",").map((key) => key.trim()) : [],
+            comment: entry.comment,
+            content: entry.content,
+            constant: entry.constant,
+            selective: entry.selective,
+            insertion_order: entry.insertion_order,
+            enabled: entry.enabled,
+            position: entry.position,
+            extensions: entry.extensions,
+          };
+        })
+      });
     } else {
       setLore(null);
     }
@@ -77,9 +93,13 @@ export default function Export() {
     });
   }, [primaries, altGreetings, lore]);
 
-  useEffect(() => {
-    console.log(character);
-  }, [character])
+  // useEffect(() => {
+  //   console.log(character);
+  // }, [character])
+
+  // useEffect(() => {
+  //   console.log(lorebook)
+  // }, [lorebook])
 
   const handleExport = () => {
     if (exportFormat === "json") {

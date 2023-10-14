@@ -34,10 +34,12 @@ export const handleJSON = async (file: any, setFileInput: any) => {
   }
 };
 
-
-
 //NOTE: tEXT png chunk, base64 encoded data with "chara " prefix
-export const handlePNG = async (file: any, setFileInput: any, setImageInput: any) => {
+export const handlePNG = async (
+  file: any,
+  setFileInput: any,
+  setImageInput: any
+) => {
   const arrayBuffer = await file.arrayBuffer();
   const uint8Array = new Uint8Array(arrayBuffer);
   const metadata = getMetadata(uint8Array, "chara");
@@ -48,7 +50,7 @@ export const handlePNG = async (file: any, setFileInput: any, setImageInput: any
   const decodedMetadata = b64DecodeUnicode(metadata);
 
   const fileContents = JSON.parse(decodedMetadata); //character data
-  console.log(fileContents);
+  //console.log(fileContents);
 
   const base64Image = uint8Array.reduce(
     (data, byte) => data + String.fromCharCode(byte),
@@ -56,8 +58,7 @@ export const handlePNG = async (file: any, setFileInput: any, setImageInput: any
   );
   const image = `data:image/png;base64,${btoa(base64Image)}`; //character image
   setImageInput(image);
-  
-  
+
   if (fileContents.data) {
     setFileInput(fileContents);
   } else if (

@@ -9,7 +9,7 @@ interface InputProps {
   name?: string;
   nameSize?: string; //font size based on tailwind syntax
   placeholder?: string;
-  val: string;
+  val: string | string[];
   changeHandler: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   width?: string; //width value based on tailwind syntax
 }
@@ -57,7 +57,7 @@ export default function Input({
   // }, [tokenizedValue]);
 
   return (
-    <div className="w-full flex flex-col gap-3">
+    <div className="w-full flex flex-col gap-4">
       {name && (
         <div className={`${nameSize ? nameSize : "text-2xl"} font-semibold`}>
           {name}
