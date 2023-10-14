@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { loreBookStore } from "../../data/PreparationStore";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
@@ -23,7 +23,7 @@ export default function LorebookInput({
   name,
   inputable,
 }: LorebookInputProps) {
-  const [lorebook, setLorebook] = useAtom(loreBookStore);
+  const [, setLorebook] = useAtom(loreBookStore);
 
   const [checkbox, setCheckbox] = useState(inputable.constant);
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useAtom } from "jotai";
-import { fileStore } from "../../data/PreparationStore";
+// import { useAtom } from "jotai";
+// import { fileStore } from "../../data/PreparationStore";
 import { ID_TrackedPrefixes } from "../../configs/StaticInputConfigs.json";
 import llamaTokenizer from "llama-tokenizer-js";
 
@@ -24,7 +24,7 @@ export default function Input({
   width,
 }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [file] = useAtom(fileStore);
+  //const [file] = useAtom(fileStore);
   const [tokenizer, setTokenizer] = useState(false);
   const [tokenizedValue, setTokenizedValue] = useState("");
 

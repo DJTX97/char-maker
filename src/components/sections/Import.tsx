@@ -4,12 +4,10 @@ import { fileStore } from "../../data/PreparationStore";
 import { imageStore, imageURLStore } from "../../data/OutputStore";
 import { handleJSON, handlePNG } from "../../utils/scripts/importers";
 
-const acceptedFileTypes = ["application/json", "image/png"];
-
 export default function Import() {
   const [imageURL, setImageURL] = useAtom(imageURLStore);
-  const [imageInput, setImageInput] = useAtom(imageStore);
-  const [fileInput, setFileInput] = useAtom(fileStore);
+  const [, setImageInput] = useAtom(imageStore);
+  const [, setFileInput] = useAtom(fileStore);
 
   const handleFile = async (file: any) => {
     if (file) {

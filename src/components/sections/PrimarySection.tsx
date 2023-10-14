@@ -10,7 +10,7 @@ interface PrimarySectionProps {
 }
 
 export default function PrimarySection({ title }: PrimarySectionProps) {
-  const [file, setFile] = useAtom(fileStore);
+  const [file] = useAtom(fileStore);
   const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
   //const [KEYS, setKEYS] = useState<string[]>([]);
   const keys = useUUID(primaryInputs.length);
@@ -25,9 +25,10 @@ export default function PrimarySection({ title }: PrimarySectionProps) {
     if (file) {
       setPrimaryInputs((prev) =>
         prev.map((input) => {
+          const value = (file.data as { [key: string]: any })[input.id];
           return {
             ...input,
-            value: file.data[input.id], //meaningless typescript error
+            value: value !== undefined ? value : "", // handle the possibility of property not existing
           };
         })
       );

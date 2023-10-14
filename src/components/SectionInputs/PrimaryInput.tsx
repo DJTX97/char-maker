@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { primaryInputStore } from "../../data/PreparationStore";
 import Input from "../MicroComps/Input";
@@ -10,7 +10,7 @@ interface MetadataInputProps {
 }
 
 export default function PrimaryInput({ id, name, value }: MetadataInputProps) {
-  const [primaryInputs, setPrimaryInputs] = useAtom(primaryInputStore);
+  const [, setPrimaryInputs] = useAtom(primaryInputStore);
 
   const [textareaValue, setTextareaValue] = useState(value);
 

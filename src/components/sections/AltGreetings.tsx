@@ -4,14 +4,14 @@ import {
   AltGreetType,
   fileStore,
 } from "../../data/PreparationStore";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import SectionButton from "../MicroComps/SectionButton";
 import AltGreetInput from "../SectionInputs/AltGreetInput";
 import CleanupButton from "../MicroComps/CleanupButton";
 
 export default function AltGreetings() {
-  const [file, setFile] = useAtom(fileStore);
+  const [file] = useAtom(fileStore);
   const [altGreets, setAltGreets] = useAtom(altGreetStore);
 
   const handleAddGreet = () => {
@@ -71,7 +71,7 @@ export default function AltGreetings() {
         <CleanupButton cleanupMethod={emptyStore} />
       </div>
       <div className="flex flex-col gap-10">
-        {altGreets.map((altGreet, index) => (
+        {altGreets.map((altGreet) => (
           <div className="relative flex sm:gap-10" key={altGreet.id}>
             <AltGreetInput
               id={altGreet.id}

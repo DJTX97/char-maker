@@ -19,7 +19,7 @@ export default function Export() {
   const [altGreetings, setAltGreetings] = useState<string[] | null>([]);
   const [lore, setLore] = useState<lorebookType | null>(null);
 
-  const [image, setImage] = useAtom(imageStore);
+  const [image] = useAtom(imageStore);
   const [character, setCharacter] = useAtom(charStore);
 
   const [exportFormat, setExportFormat] = useState("png");

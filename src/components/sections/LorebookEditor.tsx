@@ -9,11 +9,11 @@ import Input from "../MicroComps/Input";
 import { LoreBookEntry } from "../../interfaces/V2CharSchema";
 
 export default function LorebookEditor() {
-  const [file, setFile] = useAtom(fileStore);
+  const [file] = useAtom(fileStore);
   const [lorebook, setLorebook] = useAtom(loreBookStore);
   const [KEYS, setKEYS] = useState<string[]>([]);
 
-  const [ID, setID] = useState({
+  const [ID] = useState({
     keys: `keys-${uuidv4()}`,
     secondary_keys: `secondary_keys-${uuidv4()}`,
     comment: `comment-${uuidv4()}`,
