@@ -50,7 +50,7 @@ export const handlePNG = async (
   const decodedMetadata = b64DecodeUnicode(metadata);
 
   const fileContents = JSON.parse(decodedMetadata); //character data
-  console.log(fileContents);
+  //console.log(fileContents);
 
   const base64Image = uint8Array.reduce(
     (data, byte) => data + String.fromCharCode(byte),
