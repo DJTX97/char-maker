@@ -8,7 +8,8 @@ import {
 import { character, charStore, imageStore } from "../../data/OutputStore";
 import SectionButton from "../Micros/SectionButton";
 import { useEffect, useState } from "react";
-import { exportJson, exportPng } from "../../utils/scripts/exporters";
+import { exportJson, exportPng } from "../../utils/scripts/export-tools";
+import { V2CharSchema } from "../../interfaces/V2CharSchema";
 
 export default function Export() {
   const [primaryInputs] = useAtom(primaryInputStore);
@@ -16,7 +17,7 @@ export default function Export() {
   const [lorebook] = useAtom(loreBookStore);
 
   const [primaries, setPrimaries] = useState({});
-  const [altGreetings, setAltGreetings] = useState<string[] | null>([]);
+  const [altGreetings, setAltGreetings] = useState<string[]>([]);
   const [lore, setLore] = useState<lorebookType | null>(null);
 
   const [image] = useAtom(imageStore);
@@ -49,7 +50,7 @@ export default function Export() {
     if (altGreets.length > 0) {
       setAltGreetings(altGreets.map((altGreet) => altGreet.value.trim()));
     } else {
-      setAltGreetings(null);
+      setAltGreetings([]);
     }
   }, [altGreets]);
 
@@ -87,23 +88,40 @@ export default function Export() {
 
   // Prepare char
   useEffect(() => {
-    setChar({
-      spec: "chara_card_v2",
-      spec_version: "2.0",
-      data: {
-        ...character.data, //fix for weird typescript error
-        ...primaries,
-        avatar: "none",
-        alternate_greetings: altGreetings,
-        character_book: lore,
-        extensions: {},
-      },
-    });
+    let updatedCharacter = {};
+    if (lore) {
+      updatedCharacter = {
+        spec: "chara_card_v2",
+        spec_version: "2.0",
+        data: {
+          ...character.data, //fix for weird typescript error
+          ...primaries,
+          avatar: "none",
+          alternate_greetings: altGreetings,
+          character_book: lore,
+          extensions: {},
+        },
+      };
+    } else {
+      updatedCharacter = {
+        spec: "chara_card_v2",
+        spec_version: "2.0",
+        data: {
+          ...character.data, //fix for weird typescript error
+          ...primaries,
+          avatar: "none",
+          alternate_greetings: altGreetings,
+          extensions: {},
+        },
+      };
+    }
+
+    setChar(updatedCharacter as V2CharSchema);
   }, [primaries, altGreetings, lore]);
 
   // useEffect(() => {
-  //   console.log(character);
-  // }, [character])
+  //   console.log(char);
+  // }, [char])
 
   // useEffect(() => {
   //   console.log(primaries)
