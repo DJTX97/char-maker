@@ -147,3 +147,38 @@ export const importPNG = async (
     setImageInput(image);
   }
 };
+
+export const convertJPG = async (file: any) => {
+  return new Promise<File>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const convertedFile = new File(
+              [blob],
+              file.name.replace(".jpeg", ".png"),
+              {
+                type: "image/png",
+              }
+            );
+            resolve(convertedFile);
+          } else {
+            reject(new Error("Failed to convert image to PNG."));
+          }
+        }, "image/png");
+      };
+      img.src = reader.result as string;
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+    reader.readAsDataURL(file);
+  });
+};

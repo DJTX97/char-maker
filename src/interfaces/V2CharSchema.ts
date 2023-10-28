@@ -30,11 +30,11 @@ export interface V2CharSchema {
     mes_example: string;
     scenario: string;
     first_mes: string;
-    alternate_greetings: string[] | null; //should be an array
-    character_book: {
+    alternate_greetings: string[]; //should be an array
+    character_book?: {
       entries: LoreBookEntry[];
       name: string;
-    } | null;
+    }
     creator: string;
     character_version: string;
     tags: string[]; //should be an array
