@@ -1,27 +1,31 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# AI Char Maker
 
-Currently, two official plugins are available:
+This is a character editor for chat-style LLM frontend interfaces. It enables users to create character personas by filling the given fields and it provides the option to export them as JSON files or as character cards (PNG images embedded with JSON data). The primary reason for creating this tool is the lack of standalone alternatives which support the newer V2 card format. You can check it out [here](https://char-maker.vercel.app/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Vite.js
+- React
+- Tailwind
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- responsive design
+- V2 card format support
+- import V1 cards and export them as V2 cards
+- automatic conversion of JPEG images to PNG
+- multiple greeting messages
+- character lorebook editor
+- character system prompt
+- post history instructions (jailbreak)
+- informative metadata (author, notes, tags)
+- token counter (llama tokenizer)
+- light and dark themes
+## Planned
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- support for GIF images
+## Usage notes
+
+This tool currently assumes you are using [SillyTavern](https://sillytavernai.com) or similar interfaces. If your frontend requires a particular kind of format, I cannot guarantee the compatibility.
