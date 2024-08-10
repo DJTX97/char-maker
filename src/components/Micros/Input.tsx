@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useTokenizer } from "./hooks/useTokenizer";
+import { InputSuggestions } from "./InputSuggestions";
 // import { useAtom } from "jotai";
 // import { fileStore } from "../../data/PreparationStore";
-import { ID_TrackedPrefixes } from "../../configs/StaticInputConfigs.json";
-import llamaTokenizer from "llama-tokenizer-js";
 
 interface InputProps {
   id: string;
@@ -17,31 +17,16 @@ interface InputProps {
 export default function Input({
   id,
   name,
-  nameSize,
-  placeholder,
+  nameSize = "text-2xl",
+  placeholder = "",
   val,
   changeHandler,
-  width,
+  width = "",
 }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   //const [file] = useAtom(fileStore);
-  const [tokenizer, setTokenizer] = useState(false);
-  const [tokenizedValue, setTokenizedValue] = useState("");
 
-  // Set tokenizer based on ID_TrackedPrefixes (runs only once, when the component is first rendered)
-  useEffect(() => {
-    const shouldSetTokenizer = ID_TrackedPrefixes.some((prefix) =>
-      id.includes(prefix)
-    );
-    setTokenizer(shouldSetTokenizer);
-  }, [id]);
-
-  // Tokenize input
-  useEffect(() => {
-    if (val) {
-      setTokenizedValue(llamaTokenizer.encode(val));
-    }
-  }, [val]);
+  const { tokenizer, tokenizedValue } = useTokenizer({ val, id });
 
   // Autosize textarea to fit content
   useEffect(() => {
@@ -51,28 +36,29 @@ export default function Input({
     }
   }, [val]);
 
-  // useEffect(() => {
-  //   console.log(val);
-  //   console.log(tokenizedValue);
-  // }, [tokenizedValue]);
+  useEffect(() => {
+    console.log(textareaRef.current?.rows);
+  }, [textareaRef.current?.rows]);
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="relative w-full flex flex-col gap-4 left">
       {name && (
-        <div className={`${nameSize ? nameSize : "text-2xl"} dark:text-white font-semibold`}>
+        <div className={`${nameSize} dark:text-white font-semibold`}>
           {name}
         </div>
       )}
       <textarea
         id={id}
         ref={textareaRef}
-        rows={1}
-        placeholder={placeholder ?? ""}
+        rows={(val as string).split("\n").length}
+        placeholder={placeholder}
         value={val}
         onChange={changeHandler}
-        className={`${
-          width && width
-        } p-2 dark:bg-slate-700 dark:text-white rounded-lg resize-none overflow-hidden`}
+        className={`${width} p-2 dark:bg-slate-700 dark:text-white rounded-lg resize-none overflow-hidden`}
+      />
+      <InputSuggestions
+        val={val as string}
+        scrollHeight={textareaRef.current?.scrollHeight as number}
       />
       {tokenizer && (
         <div className="self-end font-semibold dark:text-white">
