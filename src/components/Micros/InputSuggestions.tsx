@@ -8,6 +8,7 @@ interface Suggestion {
 interface InputSuggestionsProps {
   val: string;
   scrollHeight: number;
+  rowsNum: number;
 }
 
 const suggestions: Suggestion[] = [
@@ -15,21 +16,16 @@ const suggestions: Suggestion[] = [
   { label: "Option 2", value: "option2" },
 ];
 
-export const InputSuggestions = ({ val, scrollHeight }: InputSuggestionsProps) => {
-
-const newLinesCount = val.split("\n").length
-
-// useEffect(() => {
-//   console.log(newLinesCount);
-// }, [val]);
-
-// useEffect(() => {
-//   console.log(val.length);
-// }, [val]);
+export const InputSuggestions = ({
+  val,
+  scrollHeight,
+  rowsNum,
+}: InputSuggestionsProps) => {
+  const rowLength = val.length / rowsNum;
 
   const position = {
-    x: val.length <= 113 ? val.lastIndexOf("@") * 8.5 : val.lastIndexOf("@") * 8.5,
-    y: scrollHeight + 10,
+    x: val.slice(0, val.length / rowsNum).lastIndexOf("@") / 2 / rowsNum,
+    y: scrollHeight + 40,
   };
 
   return (
@@ -37,7 +33,7 @@ const newLinesCount = val.split("\n").length
       {val.endsWith("@") && (
         <ul
           className={`absolute z-10 p-2 rounded-lg bg-white border border-black`}
-          style={{ left: position.x, top: position.y }}
+          style={{ left: `${position.x}rem`, top: `${position.y}px` }}
         >
           {suggestions.map((suggestion) => (
             <li key={suggestion.value}>{suggestion.label}</li>

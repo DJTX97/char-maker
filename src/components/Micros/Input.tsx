@@ -50,7 +50,7 @@ export default function Input({
       <textarea
         id={id}
         ref={textareaRef}
-        rows={(val as string).split("\n").length}
+        rows={(val as string).split("\n").length || 1}
         placeholder={placeholder}
         value={val}
         onChange={changeHandler}
@@ -59,6 +59,7 @@ export default function Input({
       <InputSuggestions
         val={val as string}
         scrollHeight={textareaRef.current?.scrollHeight as number}
+        rowsNum={textareaRef.current?.rows as number}
       />
       {tokenizer && (
         <div className="self-end font-semibold dark:text-white">
